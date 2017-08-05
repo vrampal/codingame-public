@@ -7,7 +7,12 @@ class Solution {
 	static final String UNKNOWN_MINE = "UNKNOWN";
 
 	public static void main(String args[]) {
-		Scanner in = new Scanner(System.in);
+		new Solution().run();
+	}
+	
+	Scanner in = new Scanner(System.in);
+	
+	void run() {
 		int typeCount = in.nextInt(); // Number of elements which make up the association table.
 		int fileCount = in.nextInt(); // Number Q of file names to be analyzed.
 

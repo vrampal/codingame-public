@@ -136,6 +136,14 @@ class Coord {
 		}
 	}
 
+	Coord add(Coord other) {
+		return new Coord(x + other.x, y + other.y);
+	}
+
+	Coord sub(Coord other) {
+		return new Coord(x - other.x, y - other.y);
+	}
+
 	// For 4 directions maps
 	int distanceMan(Coord other) {
 		int deltaX = abs(x - other.x);
@@ -154,7 +162,7 @@ class Coord {
 	double distanceEcl(Coord other) {
 		int deltaX = x - other.x;
 		int deltaY = y - other.y;
-		return sqrt((deltaX * deltaX) + (deltaY * deltaY));
+		return sqrt(((double)deltaX * deltaX) + ((double)deltaY * deltaY));
 	}
 
 	public int hashCode() {

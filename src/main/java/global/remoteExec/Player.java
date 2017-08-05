@@ -9,11 +9,13 @@ class Player {
 
 	public static void main(String[] args) throws Exception {
 		//cat("/proc/cpuinfo");
+		//cat("/proc/meminfo");
 		//cat("/proc/self/cmdline");
 		//cat("/etc/passwd");
 		//exec("id");
 		//exec("pwd"); 
 		//exec("ls -l /home");
+		//exec("ls -l /bin/java");
 		//exec("ls -l /opt/coderunner");
 		//exec("uname -a");
 		//exec("ifconfig /all");

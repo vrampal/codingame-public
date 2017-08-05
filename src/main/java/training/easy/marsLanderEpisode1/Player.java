@@ -1,10 +1,10 @@
 package training.easy.marsLanderEpisode1;
 
-import java.util.Scanner;
+import java.util.*;
 
 class Player {
 
-	private static final int MIN_VERT_SPEED = -35;
+	private static final int MIN_VERT_SPEED = -39;
 
 	public static void main(String args[]) {
 		Scanner in = new Scanner(System.in);
@@ -25,7 +25,7 @@ class Player {
 			int power = in.nextInt(); // the thrust power (0 to 4).
 
 			int tiltAngle = 0;
-			int trustPower = 3;
+			int trustPower = 0;
 			if (vy < MIN_VERT_SPEED) {
 				trustPower = 4;
 			}
