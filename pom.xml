@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>vrampal</groupId>
-	<artifactId>codingame-private</artifactId>
+	<artifactId>codingame-public</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
 	<properties>
