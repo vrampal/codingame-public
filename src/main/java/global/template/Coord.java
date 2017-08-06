@@ -144,21 +144,24 @@ class Coord {
 		return new Coord(x - other.x, y - other.y);
 	}
 
-	// For 4 directions maps
+	// Manhattan distance (for 4 directions maps)
+	// see: https://en.wikipedia.org/wiki/Taxicab_geometry
 	int distanceMan(Coord other) {
 		int deltaX = abs(x - other.x);
 		int deltaY = abs(y - other.y);
 		return deltaX + deltaY;
 	}
 
-	// For 8 directions maps
-	int distance(Coord other) {
+	// Chebyshev distance (for 8 directions maps)
+	// see: https://en.wikipedia.org/wiki/Chebyshev_distance
+	int distanceCheb(Coord other) {
 		int deltaX = abs(x - other.x);
 		int deltaY = abs(y - other.y);
 		return max(deltaX, deltaY);
 	}
 
-	// For physics engine
+	// Euclidean distance (for physics engine)
+	// https://en.wikipedia.org/wiki/Euclidean_distance
 	double distanceEcl(Coord other) {
 		int deltaX = x - other.x;
 		int deltaY = y - other.y;

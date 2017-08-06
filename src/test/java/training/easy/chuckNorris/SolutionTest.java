@@ -2,8 +2,6 @@ package training.easy.chuckNorris;
 
 import static org.junit.Assert.*;
 
-import java.io.*;
-import java.util.*;
 import org.junit.*;
 
 public class SolutionTest {

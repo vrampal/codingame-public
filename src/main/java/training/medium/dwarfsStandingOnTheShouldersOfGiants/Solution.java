@@ -6,12 +6,19 @@ import java.util.*;
 
 class Node {
 	final int id;
-	final Collection<Node> adjNodes = new ArrayList<>();
 
+	Collection<Node> adjNodes = Collections.emptyList();
 	int rank;
 
 	Node(int id) {
 		this.id = id;
+	}
+	
+	void createEdge(Node node) {
+		if (adjNodes.isEmpty()) {
+			adjNodes = new ArrayList<>();
+		}
+		adjNodes.add(node);
 	}
 }
 
@@ -23,15 +30,11 @@ class Graph {
 		for (int edgeIdx = 0; edgeIdx < edgeCnt; edgeIdx++) {
 			int fromId = in.nextInt(); // a relationship of influence between two people (x influences y)
 			int toId = in.nextInt();
-			createEdge(fromId, toId);
+			Node from = findNode(fromId);
+			Node to = findNode(toId);
+			from.createEdge(to);
+			//System.err.println("Edge " + fromId + " -> " + toId);
 		}
-	}
-
-	private void createEdge(int fromId, int toId) {
-		Node from = findNode(fromId);
-		Node to = findNode(toId);
-		from.adjNodes.add(to);
-		//System.err.println("Edge " + fromId + " -> " + toId);
 	}
 
 	private Node findNode(int nodeId) {
