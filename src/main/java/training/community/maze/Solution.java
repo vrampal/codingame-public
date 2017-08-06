@@ -88,6 +88,7 @@ class Board {
 				for (Direction dir : Direction.values()) {
 					Coord pos2 = pos.add(dir);
 					if (cellExist(pos2)) {
+						// Note: queue may contains duplicates
 						toFill.add(pos2);
 					}
 				}

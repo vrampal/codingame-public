@@ -1,11 +1,6 @@
 package training.medium.scrabble;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
 class Record {
 	static final int[] CHAR_VAL = { 1, 3, 3, 2, 1, 4, 2, 4, 1, 8, 5, 1, 3, 1, 1, 3, 10, 1, 1, 1, 1, 4, 4, 8, 4, 10 };
@@ -72,7 +67,7 @@ class Solution {
 		System.err.println("Input " + rawLetters + " -> " + sortLetters);
 
 		Record bestNode = Record.NONE;
-		Set<String> candidates = new HashSet<>();
+		Collection<String> candidates = new HashSet<>();
 		candidates.add(sortLetters);
 		for (int i = 0; i < sortLetters.length(); i++) {
 			for (String word : candidates) {
@@ -96,8 +91,8 @@ class Solution {
 		return new String(charArray, 0, charArray.length);
 	}
 
-	Set<String> shorterWords(Set<String> wordSet) {
-		Set<String> newWordSet = new HashSet<>();
+	Collection<String> shorterWords(Collection<String> wordSet) {
+		Collection<String> newWordSet = new HashSet<>();
 		for (String word : wordSet) {
 			String newWord = word.substring(0, word.length() - 1);
 			newWordSet.add(newWord);

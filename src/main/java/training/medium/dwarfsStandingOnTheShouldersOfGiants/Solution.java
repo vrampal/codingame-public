@@ -6,7 +6,7 @@ import java.util.*;
 
 class Node {
 	final int id;
-	final Set<Node> adjNodes = new HashSet<>();
+	final Collection<Node> adjNodes = new ArrayList<>();
 
 	int rank;
 

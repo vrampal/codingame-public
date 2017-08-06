@@ -12,7 +12,7 @@ public class SolutionTest {
 	public void testRemoveLetter() {
 		Solution solution = new Solution();
 
-		Set<String> possible = new TreeSet<>();
+		Collection<String> possible = new TreeSet<>();
 		possible.add("abcde");
 
 		possible = solution.shorterWords(possible);

@@ -52,7 +52,7 @@ class Solution {
 		int minY = 0;
 		int maxY = 0;
 
-		Set<Coord> points = new HashSet<>();
+		Collection<Coord> points = new HashSet<>();
 		int pointCount = in.nextInt();
 		for (int i = 0; i < pointCount; i++) {
 			Coord point = new Coord(in);
