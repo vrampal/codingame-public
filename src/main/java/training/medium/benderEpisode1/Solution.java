@@ -189,7 +189,7 @@ class Solution {
 			reorient();
 			
 			// Save actual state
-			System.err.println(bender);
+			//System.err.println(bender);
 			previousBender.add(new Bender(bender));
 
 			// Do the move
