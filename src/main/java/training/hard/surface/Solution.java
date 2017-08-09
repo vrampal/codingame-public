@@ -37,7 +37,7 @@ class Coord {
 }
 
 class Zone {
-	int size;
+	int size = 0;
 }
 
 class Board {
