@@ -95,8 +95,9 @@ class Graph {
 		}
 		begin.pathDist = 0.0;
 
-		Comparator<BusStop> heuristic = new DistanceFrom(end);
-		Queue<BusStop> toUpdate = new PriorityQueue<>(heuristic);
+		//Comparator<BusStop> heuristic = new DistanceFrom(end);
+		//Queue<BusStop> toUpdate = new PriorityQueue<>(heuristic);
+		Queue<BusStop> toUpdate = new ArrayDeque<>();
 		toUpdate.add(begin);
 		while (!toUpdate.isEmpty()) {
 			BusStop node = toUpdate.poll();
