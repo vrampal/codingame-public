@@ -20,7 +20,7 @@ class Solution {
 		for (int typeIdx = 0; typeIdx < typeCount; typeIdx++) {
 			String ext = in.next(); // file extension.
 			String mimeType = in.next(); // MIME type.
-			System.err.println(ext + " -> " + mimeType);
+			//System.err.println(ext + " -> " + mimeType);
 			mimeTypeByExt.put(ext.toLowerCase(), mimeType);
 		}
 		in.nextLine();
@@ -39,7 +39,7 @@ class Solution {
 				mimeType = UNKNOWN_MINE;
 			}
 
-			System.err.println(fileName + " -> " + ext + " -> " + mimeType);
+			//System.err.println(fileName + " -> " + ext + " -> " + mimeType);
 
 			// For each of the Q filenames, display on a line the corresponding MIME type.
 			// If there is no corresponding type, then display UNKNOWN.

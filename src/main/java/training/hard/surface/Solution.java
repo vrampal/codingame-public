@@ -50,7 +50,7 @@ class Board {
 	private final String[] cells;
 	private final Zone[][] zones;
 
-	Board(int width, int height) {
+	private Board(int width, int height) {
 		this.width = width;
 		this.height = height;
 		//System.err.println(height + " " + width);
@@ -77,12 +77,12 @@ class Board {
 		return ((pos.y >= 0) && (pos.y < height) && (pos.x >= 0) && (pos.x < width));
 	}
 
-	char getCellAt(Coord pos) {
+	private char getCellAt(Coord pos) {
 		return cells[pos.y].charAt(pos.x);
 	}
 	
 	boolean isWater(Coord pos) {
-		return getCellAt(pos) == WATER;
+		return (getCellAt(pos) == WATER);
 	}
 	
 	Zone getZoneAt(Coord pos) {

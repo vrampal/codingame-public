@@ -5,7 +5,12 @@ import java.util.*;
 class Solution {
 
 	public static void main(String args[]) {
-		Scanner in = new Scanner(System.in);
+		new Solution().run();
+	}
+	
+	Scanner in = new Scanner(System.in);
+	
+	void run() {
 		int horseCount = in.nextInt();
 
 		int horsePower[] = new int[horseCount];
