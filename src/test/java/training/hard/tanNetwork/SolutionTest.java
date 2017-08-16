@@ -2,6 +2,7 @@ package training.hard.tanNetwork;
 
 import static org.junit.Assert.*;
 
+import java.io.*;
 import java.util.*;
 
 import org.junit.*;
@@ -31,6 +32,42 @@ public class SolutionTest {
 		assertEquals(stop1, queue.poll());
 		assertEquals(stop2, queue.poll());
 		assertEquals(stop3, queue.poll());
+	}
+
+	@Test
+	public void testData01() throws IOException {
+		testFile("tanNetwork-01.txt");
+	}
+	
+	@Test
+	public void testData02() throws IOException {
+		testFile("tanNetwork-02.txt");
+	}
+	
+	@Test
+	public void testData03() throws IOException {
+		testFile("tanNetwork-03.txt");
+	}
+	
+	@Test
+	public void testData04() throws IOException {
+		testFile("tanNetwork-04.txt");
+	}
+	
+	@Test
+	public void testData05() throws IOException {
+		testFile("tanNetwork-05.txt");
+	}
+	
+	@Test
+	public void testData06() throws IOException {
+		testFile("tanNetwork-06.txt");
+	}
+	
+	private void testFile(String filename) throws IOException {
+		Solution solution = new Solution();
+		solution.in = new Scanner(new File("data/" + filename));
+		solution.run();
 	}
 
 }

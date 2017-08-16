@@ -23,16 +23,20 @@ class Monitor {
 		MemoryUsage heapUsage = MEMORY_MX_BEAN.getHeapMemoryUsage();
 		long totalMem = heapUsage.getMax();
 		long usedMem = heapUsage.getUsed();
-		int usedPercent = (int) ((usedMem * 100) / totalMem);
+		int  usedPercent = (int) ((usedMem * 100) / totalMem);
 		return usedPercent;
 	}
-	
+
 	void nextRound() {
 		long now = System.nanoTime();
 		if (debugEnable) {
 			int elapsed = (int) ((now - timeMark) / 1000000L);
-			int memUsed = memUsed();
-			System.err.println("Round " + round + " in " + elapsed + "ms, memory " + memUsed + "%");
+			MemoryUsage heapUsage = MEMORY_MX_BEAN.getHeapMemoryUsage();
+			long totalMem = heapUsage.getMax();
+			long usedMem = heapUsage.getUsed();
+			int  usedPercent = (int) ((usedMem * 100) / totalMem);
+			long usedMemKb = usedMem / 1024;
+			System.err.println("Round " + round + " in " + elapsed + "ms, memory " + usedMemKb + "kB (" + usedPercent + "%)");
 		}
 		timeMark = now;
 		round++;
