@@ -144,6 +144,12 @@ class Coord {
 		return new Coord(x - other.x, y - other.y);
 	}
 
+	Coord mult(double scale) {
+		int newX = (int) (x * scale);
+		int nexY = (int) (y * scale);
+		return new Coord(newX, nexY);
+	}
+
 	// Manhattan distance (for 4 directions maps)
 	// see: https://en.wikipedia.org/wiki/Taxicab_geometry
 	int distanceMan(Coord other) {
@@ -166,6 +172,12 @@ class Coord {
 		int deltaX = x - other.x;
 		int deltaY = y - other.y;
 		return sqrt(((double)deltaX * deltaX) + ((double)deltaY * deltaY));
+	}
+
+	int distanceEcl2(Coord other) {
+		int deltaX = x - other.x;
+		int deltaY = y - other.y;
+		return (deltaX * deltaX) + (deltaY * deltaY);
 	}
 
 	public int hashCode() {
