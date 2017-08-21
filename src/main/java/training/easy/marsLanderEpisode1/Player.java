@@ -6,7 +6,7 @@ class Player {
 
 	private static final int MIN_VERT_SPEED = -39;
 
-	public static void main(String args[]) {
+	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
 		int pointCount = in.nextInt(); // the number of points used to draw the surface of Mars.
 		for (int i = 0; i < pointCount; i++) {

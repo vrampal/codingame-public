@@ -21,7 +21,7 @@ class Coord {
 		case EAST:  return new Coord(x + 1, y);
 		case SOUTH: return new Coord(x,     y + 1);
 		case WEST:  return new Coord(x - 1, y);
-		default: return null;
+		default:    throw new IllegalArgumentException("Invalid dir: " + dir);
 		}
 	}
 
@@ -36,6 +36,7 @@ class Coord {
 	public boolean equals(Object obj) {
 		if (this == obj) return true;
 		if (obj == null) return false;
+		if (getClass() != obj.getClass()) return false;
 		Coord other = (Coord) obj;
 		return (x == other.x) && (y == other.y);
 	}
@@ -91,7 +92,7 @@ class Board {
 				}
 			}
 		}
-		return null;
+		throw new RuntimeException("Can't find first " + target);
 	}
 
 	Coord findSecond(char target, Coord first) {
@@ -103,7 +104,7 @@ class Board {
 				}
 			}
 		}
-		return null;
+		throw new RuntimeException("Can't find second " + target);
 	}
 }
 
@@ -152,13 +153,12 @@ class Bender {
 	public boolean equals(Object obj) {
 		if (this == obj) return true;
 		if (obj == null) return false;
+		if (getClass() != obj.getClass()) return false;
 		Bender other = (Bender) obj;
 		if ((breakCount != other.breakCount) ||(breakMode != other.breakMode) || (dir != other.dir)
 				|| (inverted != other.inverted))
 			return false;
-		if (pos == null)
-			return other.pos == null;
-		return pos.equals(other.pos);
+		return ((pos == other.pos) || (pos.equals(other.pos)));
 	}
 
 	public String toString() {
@@ -168,7 +168,7 @@ class Bender {
 
 class Solution {
 
-	public static void main(String args[]) {
+	public static void main(String[] args) {
 		new Solution().run();
 	}
 

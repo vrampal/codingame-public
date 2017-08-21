@@ -27,7 +27,7 @@ class Coord {
 		case RIGHT:  return new Coord(x + 1, y);
 		case BOTTOM: return new Coord(x,     y + 1);
 		case LEFT:   return new Coord(x - 1, y);
-		default: return null;
+		default:     throw new IllegalArgumentException("Invalid dir: " + dir);
 		}
 	}
 
@@ -124,7 +124,7 @@ class Board {
 
 class Player {
 
-	public static void main(String args[]) {
+	public static void main(String[] args) {
 		new Player().run();
 	}
 

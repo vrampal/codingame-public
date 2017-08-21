@@ -64,6 +64,8 @@ class DistanceFrom implements Comparator<BusStop> {
 }
 
 class Graph {
+	static final Collection<BusStop> NO_PATH = new ArrayList<>();
+	
 	final Map<String, BusStop> stopsById;
 
 	Graph(Scanner in) {
@@ -113,7 +115,7 @@ class Graph {
 		}
 		
 		if (end.pathDist == Double.POSITIVE_INFINITY) {
-			return null;
+			return NO_PATH;
 		}
 		
 		Deque<BusStop> path = new ArrayDeque<>();
@@ -130,7 +132,7 @@ class Graph {
 
 class Solution {
 
-	public static void main(String args[]) {
+	public static void main(String[] args) {
 		new Solution().run();
 	}
 
@@ -144,7 +146,7 @@ class Solution {
 		BusStop begin = graph.getBusStop(beginId);
 		BusStop end = graph.getBusStop(endId);
 		Collection<BusStop> path = graph.shortestPath(begin, end);
-		if (path == null) {
+		if (path == Graph.NO_PATH) {
 			System.out.println("IMPOSSIBLE");
 		} else {
 			for (BusStop stop : path) {

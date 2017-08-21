@@ -6,7 +6,7 @@ class Solution {
 
 	static final String UNKNOWN_MINE = "UNKNOWN";
 
-	public static void main(String args[]) {
+	public static void main(String[] args) {
 		new Solution().run();
 	}
 	

@@ -24,7 +24,7 @@ class Coord {
 
 class Player {
 
-	public static void main(String args[]) {
+	public static void main(String[] args) {
 		new Player().run();
 	}
 

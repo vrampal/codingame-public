@@ -30,6 +30,7 @@ class Coord {
 	public boolean equals(Object obj) {
 		if (this == obj) return true;
 		if (obj == null) return false;
+		if (getClass() != obj.getClass()) return false;
 		Coord other = (Coord) obj;
 		return (x == other.x) && (y == other.y);
 	}
@@ -41,7 +42,7 @@ class Coord {
 
 class Solution {
 
-	public static void main(String args[]) {
+	public static void main(String[] args) {
 		new Solution().run();
 	}
 	Scanner in = new Scanner(System.in);

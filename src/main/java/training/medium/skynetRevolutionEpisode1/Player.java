@@ -31,7 +31,7 @@ class Node {
 				return node;
 			}
 		}
-		return null;
+		throw new RuntimeException("Can't find adj exit on node " + id);
 	}
 }
 
@@ -84,7 +84,7 @@ class Graph {
 
 class Player {
 
-	public static void main(String args[]) {
+	public static void main(String[] args) {
 		new Player().run();
 	}
 

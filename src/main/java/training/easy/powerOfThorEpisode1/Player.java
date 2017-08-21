@@ -4,7 +4,7 @@ import java.util.*;
 
 class Player {
 
-	public static void main(String args[]) {
+	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
 		int lightX = in.nextInt(); // the X position of the light of power
 		int lightY = in.nextInt(); // the Y position of the light of power

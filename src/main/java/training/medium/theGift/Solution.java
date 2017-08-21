@@ -6,7 +6,7 @@ import java.util.*;
 
 class Solution {
 
-	public static void main(String args[]) {
+	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
 		int nbOods = in.nextInt();
 		int cost = in.nextInt();

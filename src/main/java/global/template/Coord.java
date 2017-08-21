@@ -88,11 +88,11 @@ class Coord {
 
 	Coord add(Direction4 dir) {
 		switch (dir) {
-		case N: return new Coord(x,     y - 1);
-		case E: return new Coord(x + 1, y);
-		case S: return new Coord(x,     y + 1);
-		case W: return new Coord(x - 1, y);
-		default: return null;
+		case N:  return new Coord(x,     y - 1);
+		case E:  return new Coord(x + 1, y);
+		case S:  return new Coord(x,     y + 1);
+		case W:  return new Coord(x - 1, y);
+		default: throw new IllegalArgumentException("Invalid dir: " + dir);
 		}
 	}
 
@@ -106,7 +106,7 @@ class Coord {
 			case SW: return new Coord(x - 1, y + 1);
 			case W:  return new Coord(x - 1, y);
 			case NW: return new Coord(x - 1, y - 1);
-			default: return null;
+			default: throw new IllegalArgumentException("Invalid dir: " + dir);
 			}
 		} else {
 			// Odd lines
@@ -117,7 +117,7 @@ class Coord {
 			case SW: return new Coord(x,     y + 1);
 			case W:  return new Coord(x - 1, y);
 			case NW: return new Coord(x,     y - 1);
-			default: return null;
+			default: throw new IllegalArgumentException("Invalid dir: " + dir);
 			}
 		}
 	}
@@ -132,7 +132,7 @@ class Coord {
 		case SW: return new Coord(x - 1, y + 1);
 		case W:  return new Coord(x - 1, y);
 		case NW: return new Coord(x - 1, y - 1);
-		default: return null;
+		default: throw new IllegalArgumentException("Invalid dir: " + dir);
 		}
 	}
 
@@ -191,6 +191,7 @@ class Coord {
 	public boolean equals(Object obj) {
 		if (this == obj) return true;
 		if (obj == null) return false;
+		if (getClass() != obj.getClass()) return false;
 		Coord other = (Coord) obj;
 		return (x == other.x) && (y == other.y);
 	}

@@ -23,11 +23,11 @@ class Coord {
 	
 	Coord add(Direction dir) {
 		switch (dir) {
-		case N: return new Coord(x,     y - 1);
-		case E: return new Coord(x + 1, y);
-		case S: return new Coord(x,     y + 1);
-		case W: return new Coord(x - 1, y);
-		default: return null;
+		case N:  return new Coord(x,     y - 1);
+		case E:  return new Coord(x + 1, y);
+		case S:  return new Coord(x,     y + 1);
+		case W:  return new Coord(x - 1, y);
+		default: throw new IllegalArgumentException("Invalid dir: " + dir);
 		}
 	}
 	
@@ -120,7 +120,7 @@ class Board {
 
 class Solution {
 
-	public static void main(String args[]) {
+	public static void main(String[] args) {
 		new Solution().run();
 	}
 
