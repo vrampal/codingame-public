@@ -4,7 +4,7 @@ import java.util.*;
 
 class Node {
 	final int id;
-	final Collection<Node> adjNodes = new ArrayList<>();
+	final Collection<Node> adj = new ArrayList<>();
 
 	boolean isExit = false;
 	int enemyDistance;
@@ -17,7 +17,7 @@ class Node {
 	void recuseEnemyDistance(int newEnemyDistance) {
 		enemyDistance = newEnemyDistance;
 		if (!isExit) {
-			for (Node node : adjNodes) {
+			for (Node node : adj) {
 				if (node.enemyDistance > enemyDistance + 1) {
 					node.recuseEnemyDistance(enemyDistance + 1); 
 				}
@@ -26,7 +26,7 @@ class Node {
 	}
 
 	Node firstAdjExit() {
-		for (Node node : adjNodes) {
+		for (Node node : adj) {
 			if (node.isExit) {
 				return node;
 			}
@@ -53,13 +53,13 @@ class Graph {
 	void createEdge(int node1idx, int node2idx) {
 		Node node1 = getNode(node1idx);
 		Node node2 = getNode(node2idx);
-		node1.adjNodes.add(node2);
-		node2.adjNodes.add(node1);
+		node1.adj.add(node2);
+		node2.adj.add(node1);
 	}
 
 	void destroyEdge(Node node1, Node node2) {
-		node1.adjNodes.remove(node2);
-		node2.adjNodes.remove(node1);
+		node1.adj.remove(node2);
+		node2.adj.remove(node1);
 	}
 
 	void recompute(int enemyNodeIdx) {
@@ -71,7 +71,7 @@ class Graph {
 		// Update adjExitCount
 		for (Node node : nodes) {
 			if (node.isExit) {
-				for (Node adj : node.adjNodes) {
+				for (Node adj : node.adj) {
 					adj.adjExitCount++;
 				}
 			}

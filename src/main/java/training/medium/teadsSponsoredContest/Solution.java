@@ -4,7 +4,7 @@ import java.util.*;
 
 class Node {
 	final int id;
-	final Collection<Node> adjNodes = new ArrayList<>();
+	final Collection<Node> adj = new ArrayList<>();
 
 	Node(int id) {
 		this.id = id;
@@ -26,8 +26,8 @@ class Graph {
 	void createEdge(int id1, int id2) {
 		Node node1 = findNode(id1);
 		Node node2 = findNode(id2);
-		node1.adjNodes.add(node2);
-		node2.adjNodes.add(node1);
+		node1.adj.add(node2);
+		node2.adj.add(node1);
 	}
 
 	int reduce() {
@@ -36,7 +36,7 @@ class Graph {
 
 		//System.err.println("Round " + round + " size " + nodesById.size());
 		for (Node node : nodesById.values()) {
-			if (node.adjNodes.size() <= 1) {
+			if (node.adj.size() <= 1) {
 				toDelete.add(node);
 			}
 		}
@@ -54,7 +54,7 @@ class Graph {
 			toDelete = new ArrayDeque<>();
 			//System.err.println("Round " + round + " size " + nodesById.size());
 			for (Node node : nodesById.values()) {
-				if (node.adjNodes.size() <= 1) {
+				if (node.adj.size() <= 1) {
 					toDelete.add(node);
 				}
 			}
@@ -65,8 +65,8 @@ class Graph {
 	void removeNode(Node node) {
 		System.err.println("Removing node " + node.id);
 		nodesById.remove(node.id);
-		for (Node other : node.adjNodes) {
-			other.adjNodes.remove(node);
+		for (Node other : node.adj) {
+			other.adj.remove(node);
 		}
 	}
 }

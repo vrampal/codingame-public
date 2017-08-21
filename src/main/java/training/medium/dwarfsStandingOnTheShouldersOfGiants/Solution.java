@@ -7,7 +7,7 @@ import java.util.*;
 class Node {
 	final int id;
 
-	Collection<Node> adjNodes = Collections.emptyList();
+	Collection<Node> adj = Collections.emptyList();
 	int rank;
 
 	Node(int id) {
@@ -15,10 +15,10 @@ class Node {
 	}
 	
 	void createEdge(Node node) {
-		if (adjNodes.isEmpty()) {
-			adjNodes = new ArrayList<>();
+		if (adj.isEmpty()) {
+			adj = new ArrayList<>();
 		}
-		adjNodes.add(node);
+		adj.add(node);
 	}
 }
 
@@ -64,7 +64,7 @@ class Graph {
 				Node node = curQueue.poll();
 				node.rank = max(node.rank, curRank);
 				//System.err.println("Node " + node.id + " is rank " + node.rank);
-				nextQueue.addAll(node.adjNodes);
+				nextQueue.addAll(node.adj);
 			}
 			curRank++;
 			curQueue = nextQueue;

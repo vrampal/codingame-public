@@ -40,7 +40,7 @@ class Solution {
 		for (int taskIdx = 0; taskIdx < taskCount; taskIdx++) {
 			tasks.add(new Task(in));
 		}
-		Collections.sort(tasks, FinishFirst.INSTANCE);
+		tasks.sort(FinishFirst.INSTANCE);
 		int ending = 0;
 		int result = 0;
 		for (Task task : tasks) {
