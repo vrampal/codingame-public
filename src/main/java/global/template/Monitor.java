@@ -7,7 +7,7 @@ class Monitor {
 
 	private final boolean debugEnable;
 	private long timeMark = System.nanoTime();
-	int round = 0;
+	int turn = 0;
 	
 	Monitor(boolean print) {
 		this.debugEnable = print;
@@ -36,9 +36,9 @@ class Monitor {
 			long usedMem = heapUsage.getUsed();
 			int  usedPercent = (int) ((usedMem * 100) / totalMem);
 			long usedMemKb = usedMem / 1024;
-			System.err.println("Round " + round + " in " + elapsed + "ms, memory " + usedMemKb + "kB (" + usedPercent + "%)");
+			System.err.println("Turn " + turn + " in " + elapsed + "ms, memory " + usedMemKb + "kB (" + usedPercent + "%)");
 		}
 		timeMark = now;
-		round++;
+		turn++;
 	}
 }
