@@ -10,7 +10,7 @@ class LexiNode {
 	LexiNode getNode(char ch) {
 		if (ch == '.') return dot;
 		if (ch == '-') return dash;
-		throw new RuntimeException("Invalid character: " + ch);
+		throw new IllegalArgumentException("Invalid character: " + ch);
 	}
 
 	LexiNode createNode(char ch) {
@@ -26,7 +26,7 @@ class LexiNode {
 			}
 			return dash;
 		}
-		throw new RuntimeException("Invalid character: " + ch);
+		throw new IllegalArgumentException("Invalid character: " + ch);
 	}
 }
 
@@ -64,7 +64,7 @@ class LexiTree {
 			case 'X': builder.append("-..-"); break;
 			case 'Y': builder.append("-.--"); break;
 			case 'Z': builder.append("--.."); break;
-			default: throw new RuntimeException("Invalid character: " + ch);
+			default: throw new IllegalArgumentException("Invalid character: " + ch);
 			}
 		}
 		return builder.toString();

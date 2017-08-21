@@ -29,11 +29,9 @@ class Solution {
 						maxLoss = loss;
 						System.err.println("maxLoss: " + maxLoss);
 					}
-				} else if (value > prevValue) {
-					if (highestValue < value) {
-						highestValue = value;
-						System.err.println("highestValue: " + highestValue);
-					}
+				} else if ((value > prevValue) && (highestValue < value)) {
+					highestValue = value;
+					System.err.println("highestValue: " + highestValue);
 				}
 				prevValue = value;
 			}

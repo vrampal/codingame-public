@@ -24,10 +24,10 @@ class Player {
 			}
 
 			if (lightX > thorX) {
-				direction += 'E';
+				direction += "E";
 				thorX++;
 			} else if (lightX < thorX) {
-				direction += 'W';
+				direction += "W";
 				thorX--;
 			}
 

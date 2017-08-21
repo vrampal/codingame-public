@@ -129,12 +129,10 @@ class Player {
 	}
 
 	Scanner in = new Scanner(System.in);
-	private Board board;
-	Coord posExit;
 
 	void run() {
-		board = new Board(in);
-		posExit = new Coord(in.nextInt(), board.height - 1);
+		Board board = new Board(in);
+		Coord exitPos = new Coord(in.nextInt(), board.height - 1);
 
 		while (true) {
 			Coord posIn = new Coord(in);

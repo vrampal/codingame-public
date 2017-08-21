@@ -64,7 +64,7 @@ class DistanceFrom implements Comparator<BusStop> {
 }
 
 class Graph {
-	static final Collection<BusStop> NO_PATH = new ArrayList<>();
+	static final Collection<BusStop> NO_PATH = Collections.emptyList();
 	
 	final Map<String, BusStop> stopsById;
 

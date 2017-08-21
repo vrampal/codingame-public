@@ -115,11 +115,9 @@ class Player {
 			Node node1 = null;
 			int node1dist = Integer.MAX_VALUE;
 			for (Node node : graph.nodes) {
-				if (node.adjExitCount > 0) {
-					if (node1dist > node.enemyDistance) {
-						node1dist = node.enemyDistance;
-						node1 = node;
-					}
+				if ((node.adjExitCount > 0) && (node1dist > node.enemyDistance)) {
+					node1dist = node.enemyDistance;
+					node1 = node;
 				}
 			}
 			Node node2 = node1.firstAdjExit();

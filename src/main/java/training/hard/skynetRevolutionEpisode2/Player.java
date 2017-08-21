@@ -130,11 +130,9 @@ class Player {
 			Node node1 = null;
 			int node1margin = Integer.MAX_VALUE;
 			for (Node node : graph.nodes) {
-				if (node.adjExitCount > 0) {
-					if (node1margin > node.enemyMargin) {
-						node1margin = node.enemyMargin;
-						node1 = node;
-					}
+				if ((node.adjExitCount > 0) && (node1margin > node.enemyMargin)) {
+					node1margin = node.enemyMargin;
+					node1 = node;
 				}
 			}
 			Node node2 = node1.firstAdjExit();

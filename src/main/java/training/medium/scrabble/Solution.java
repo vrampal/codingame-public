@@ -72,10 +72,8 @@ class Solution {
 		for (int i = 0; i < sortLetters.length(); i++) {
 			for (String word : candidates) {
 				Record node = dictionary.get(word);
-				if (node != null) {
-					if (node.betterThan(bestNode)) {
-						bestNode = node;
-					}
+				if ((node != null) && (node.betterThan(bestNode))) {
+					bestNode = node;
 				}
 			}
 			candidates = shorterWords(candidates);

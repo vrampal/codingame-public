@@ -22,7 +22,7 @@ class Player {
 		int floorCount = in.nextInt(); // number of floors
 		int width = in.nextInt(); // width of the area
 
-		int targetPerFloor[] = new int[floorCount];
+		int[] targetPerFloor = new int[floorCount];
 
 		int nbRounds = in.nextInt(); // maximum number of rounds
 		int exitFloor = in.nextInt(); // floor on which the exit is found

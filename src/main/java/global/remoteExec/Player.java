@@ -52,7 +52,7 @@ class Player {
 		File dir = new File(pathname);
 		System.err.println(dir.getAbsolutePath());
 		File[] subFiles = dir.listFiles();
-		System.err.println("" + subFiles.length + " files");
+		System.err.println(Integer.toString(subFiles.length) + " files");
 		for (File f : subFiles) {
 			System.err.println(f.getAbsolutePath());
 		}

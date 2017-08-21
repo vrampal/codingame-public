@@ -196,14 +196,10 @@ class Solution {
 			Coord nextPos = bender.nextPos();
 			
 			char nextCell = board.getCellAt(nextPos);
-			switch (nextCell) {
-			case 'X':
+			if ((nextCell == 'X') && bender.breakMode) {
 				bender.breakCount++;
 				board.setCellAt(nextPos, ' ');
 				nextCell = ' ';
-				break;
-			}
-			if ((nextCell == 'X') && bender.breakMode) {
 			}
 			bender.pos = nextPos;
 			applyEffect(nextCell);
