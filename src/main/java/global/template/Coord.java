@@ -75,7 +75,7 @@ class Coord {
 	final int x;
 	final int y;
 
-	private Coord(int x, int y) {
+	Coord(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
@@ -145,8 +145,8 @@ class Coord {
 	}
 
 	Coord mult(double scale) {
-		int newX = (int) (x * scale);
-		int nexY = (int) (y * scale);
+		int newX = (int) rint(x * scale);
+		int nexY = (int) rint(y * scale);
 		return new Coord(newX, nexY);
 	}
 
@@ -198,5 +198,57 @@ class Coord {
 
 	public String toString() {
 		return "[" + x + ", " + y + "]";
+	}
+}
+
+class Segment {
+	final Coord from;
+	final Coord to;
+
+	Segment(Coord from, Coord to) {
+		this.from = from;
+		this.to = to;
+	}
+	
+	Coord middle() {
+		int newX = (from.x + to.x) / 2;
+		int newY = (from.y + to.y) / 2;
+		return new Coord(newX, newY);
+	}
+	
+	/**
+	 * Check if a point is inside a bounding box.
+	 * @return true if and only if inside.
+	 */
+	boolean inBoundingBox(Coord pos) {
+		return min(from.x, to.x) <= pos.x && pos.x <= max(from.x, to.x)
+				&& min(from.y, to.y) <= pos.y && pos.y <= max(from.y, to.y);
+	}
+
+	/**
+	 * Find the orientation of the triplet (from, to, pos).
+	 * @return 1 when clockwise, 0 when colinear, -1 when counterclockwise.
+	 */
+	int orientation(Coord pos) {
+		double val = (to.y - from.y) * (pos.x - to.x) - (to.x - from.x) * (pos.y - to.y);
+		return (val > 0) ? 1 : ((val < 0) ? -1 : 0);
+	}
+
+	/**
+	 * Test of 2 segments intersects.
+	 * @return true if and only if segments intersects.
+	 */
+	boolean intersect(Segment other) {
+		int o1 = orientation(other.from);
+		int o2 = orientation(other.to);
+		int o3 = other.orientation(from);
+		int o4 = other.orientation(to);
+		return (o1 != o2 && o3 != o4) // <- General case, special case below
+				|| (o1 == 0 && inBoundingBox(other.from)) || (o2 == 0 && inBoundingBox(other.to))
+				|| (o3 == 0 && other.inBoundingBox(from)) || (o4 == 0 && other.inBoundingBox(to));
+	}
+
+	public String toString() {
+		return from + "-" + to;
 	}
 }

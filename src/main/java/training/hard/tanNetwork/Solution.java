@@ -24,7 +24,7 @@ class BusStop {
 	}
 	
 	double distanceGeo(BusStop other) {
-		double x = (longi - other.longi) * cos((lati + other.lati) / 2.0);
+		double x = (longi - other.longi) * cos((lati + other.lati) * 0.5);
 		double y = (lati - other.lati);
 		return sqrt(x * x + y * y) * 6371.0;
 	}

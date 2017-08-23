@@ -87,7 +87,7 @@ class Player {
 		long totalMem = runtime.totalMemory();
 		long freeMem = runtime.freeMemory();
 		long usedMem = totalMem - freeMem;
-		int usedPercent = (int) ((usedMem * 100) / totalMem);
+		int usedPercent = (int) ((usedMem * 100L) / totalMem);
 		System.err.println("Memory usage: " + usedPercent + "% (" + (usedMem / 1024) + "kB / " + (totalMem / 1024) + "kB)");
 	}
 
@@ -96,7 +96,7 @@ class Player {
 		MemoryUsage heapUsage = memoryMxBean.getHeapMemoryUsage();
 		long totalMem = heapUsage.getMax();
 		long usedMem = heapUsage.getUsed();
-		int usedPercent = (int) ((usedMem * 100) / totalMem);
+		int usedPercent = (int) ((usedMem * 100L) / totalMem);
 		System.err.println("Heap usage: " + usedPercent + "% (" + (usedMem / 1024) + "kB / " + (totalMem / 1024) + "kB)");
 	}
 }
