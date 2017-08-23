@@ -174,12 +174,6 @@ class Coord {
 		return sqrt(((double)deltaX * deltaX) + ((double)deltaY * deltaY));
 	}
 
-	int distanceEcl2(Coord other) {
-		int deltaX = x - other.x;
-		int deltaY = y - other.y;
-		return (deltaX * deltaX) + (deltaY * deltaY);
-	}
-
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;

@@ -56,7 +56,6 @@ public class CoordTest {
 		assertEquals(13, first.distanceMan(second));
 		assertEquals(8, first.distanceCheb(second));
 		assertEquals(9.4339811320566, first.distanceEcl(second), 1e-14);
-		assertEquals(89, first.distanceEcl2(second));
 		
 		assertFalse(first.hashCode() == second.hashCode());
 		assertFalse(first.equals(second));
