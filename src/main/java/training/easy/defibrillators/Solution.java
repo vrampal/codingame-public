@@ -36,10 +36,7 @@ class Solution {
 		GeoCoord userCoord = new GeoCoord(in.next(), in.next());
 
 		int defibCount = in.nextInt();
-		if (in.hasNextLine()) {
-			in.nextLine();
-		}
-
+		in.nextLine(); // Eat \n before reading raw lines
 		String closestName = null;
 		double closestDist = Double.POSITIVE_INFINITY;
 		for (int defixIdx = 0; defixIdx < defibCount; defixIdx++) {

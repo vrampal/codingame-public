@@ -60,7 +60,7 @@ class Board {
 
 	void readFrom(Scanner in) {
 		for (int rowIdx = 0; rowIdx < height; rowIdx++) {
-			String row = in.nextLine();
+			String row = in.next();
 			//System.err.println(row);
 			cells[rowIdx] = new StringBuilder(row);
 		}
@@ -114,9 +114,6 @@ class Solution {
 	void run() {
 		Board board = new Board(in);
 		Coord entry = new Coord(in);
-		if (in.hasNextLine()) {
-			in.nextLine();
-		}
 		board.readFrom(in);
 
 		board.floodFill(entry);

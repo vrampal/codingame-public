@@ -25,8 +25,8 @@ class Solution {
 			deckP2.addLast(cardP2);
 		}
 
-		System.err.println("DeckP1: " + printDeck(deckP1));
-		System.err.println("DeckP2: " + printDeck(deckP2));
+		//System.err.println("DeckP1: " + printDeck(deckP1));
+		//System.err.println("DeckP2: " + printDeck(deckP2));
 
 		int roundCount = 0;
 		Deque<String> tableP1 = new LinkedList<>();
@@ -39,22 +39,22 @@ class Solution {
 			tableP1.addFirst(cardP1);
 			tableP2.addFirst(cardP2);
 			if (discardCount > 0) {
-				System.err.println("Discard - " + cardP1 + " / " + cardP2);
+				//System.err.println("Discard - " + cardP1 + " / " + cardP2);
 				discardCount--;
 			} else {
 				int delta = compareCards(cardP1, cardP2);
 				if (delta > 0) {
-					System.err.println("Round for P1 - " + cardP1 + " / " + cardP2);
+					//System.err.println("Round for P1 - " + cardP1 + " / " + cardP2);
 					transfer(tableP1, deckP1);
 					transfer(tableP2, deckP1);
 					roundCount++;
 				} else if (delta < 0) {
-					System.err.println("Round for P2 - " + cardP1 + " / " + cardP2);
+					//System.err.println("Round for P2 - " + cardP1 + " / " + cardP2);
 					transfer(tableP1, deckP2);
 					transfer(tableP2, deckP2);
 					roundCount++;
 				} else {
-					System.err.println("Battle - " + cardP1 + " / " + cardP2);
+					//System.err.println("Battle - " + cardP1 + " / " + cardP2);
 					discardCount = 3;
 				}
 			}

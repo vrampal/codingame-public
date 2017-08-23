@@ -103,17 +103,11 @@ class Board {
 	
 	Board(Scanner in) {
 		this(in.nextInt(), in.nextInt());
-		if (in.hasNextLine()) {
-			in.nextLine();
-		}
 		for (int rowIdx = 0; rowIdx < height; rowIdx++) {
-			String rowStr = in.nextLine();
-			String[] row = rowStr.split(" ");
 			for (int colIdx = 0; colIdx < width; colIdx++) {
-				int n = Integer.parseInt(row[colIdx]);
+				int n = in.nextInt();
 				cells[rowIdx][colIdx] = TYPES[n];
 			}
-			//System.err.println(rowStr);
 		}
 	}
 
@@ -136,13 +130,13 @@ class Player {
 
 		while (true) {
 			Coord posIn = new Coord(in);
-			System.err.println("posIn: " + posIn);
+			//System.err.println("posIn: " + posIn);
 			Direction dirIn = Direction.valueOf(in.next());
-			System.err.println("dirIn: " + dirIn);
+			//System.err.println("dirIn: " + dirIn);
 			Cell room = board.getCellAt(posIn);
-			System.err.println("roomType: " + room.type);
+			//System.err.println("roomType: " + room.type);
 			Direction dirOut = room.cross(dirIn);
-			System.err.println("dirOut: " + dirOut);
+			//System.err.println("dirOut: " + dirOut);
 			Coord posOut = posIn.add(dirOut);
 
 			// One line containing the X Y coordinates of the room in which you believe Indy will be on the next turn.

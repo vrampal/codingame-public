@@ -63,11 +63,8 @@ class Board {
 	
 	Board(Scanner in) {
 		this(in.nextInt(), in.nextInt());
-		if (in.hasNextLine()) {
-			in.nextLine();
-		}
 		for (int rowIdx = 0; rowIdx < height; rowIdx++) {
-			String row = in.nextLine();
+			String row = in.next();
 			//System.err.println(row);
 			cells[rowIdx] = row;
 		}

@@ -1,5 +1,7 @@
 package training.medium.stockExchangeLosses;
 
+import static java.lang.Math.*;
+
 import java.util.*;
 
 class Solution {
@@ -10,30 +12,14 @@ class Solution {
 		int maxLoss = 0;
 		if (valueCount > 0) {
 			// First value
-			int value = in.nextInt();
-			System.err.println("Value: " + value);
-
-			int highestValue = value;
-			System.err.println("highestValue: " + highestValue);
-			int prevValue = value;
+			int highestValue = in.nextInt();
 
 			// Next values
 			for (int index = 1; index < valueCount; index++) {
-				value = in.nextInt();
-				System.err.println("Value: " + value);
-
-				if (value < prevValue) {
-					int loss = value - highestValue;
-					System.err.println("loss: " + loss);
-					if (maxLoss > loss) {
-						maxLoss = loss;
-						System.err.println("maxLoss: " + maxLoss);
-					}
-				} else if ((value > prevValue) && (highestValue < value)) {
-					highestValue = value;
-					System.err.println("highestValue: " + highestValue);
-				}
-				prevValue = value;
+				int value = in.nextInt();
+				highestValue = max(highestValue, value);
+				int loss = value - highestValue;
+				maxLoss = min(maxLoss, loss);
 			}
 		}
 		System.out.println(Integer.toString(maxLoss));

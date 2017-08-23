@@ -61,9 +61,7 @@ class Board {
 	
 	Board(Scanner in) {
 		this(in.nextInt(), in.nextInt());
-		if (in.hasNextLine()) {
-			in.nextLine();
-		}
+		in.nextLine(); // Eat \n before reading raw lines
 		for (int rowIdx = 0; rowIdx < height; rowIdx++) {
 			String row = in.nextLine();
 			//System.err.println(row);

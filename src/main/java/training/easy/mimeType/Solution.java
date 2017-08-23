@@ -23,10 +23,9 @@ class Solution {
 			//System.err.println(ext + " -> " + mimeType);
 			mimeTypeByExt.put(ext.toLowerCase(), mimeType);
 		}
-		in.nextLine();
 
 		for (int fileIdx = 0; fileIdx < fileCount; fileIdx++) {
-			String fileName = in.nextLine(); // One file name per line.
+			String fileName = in.next(); // One file name per line.
 
 			String ext = "";
 			int lastDot = fileName.lastIndexOf('.');

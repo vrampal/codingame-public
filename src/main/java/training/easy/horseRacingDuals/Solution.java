@@ -1,5 +1,7 @@
 package training.easy.horseRacingDuals;
 
+import static java.lang.Math.*;
+
 import java.util.*;
 
 class Solution {
@@ -12,7 +14,6 @@ class Solution {
 	
 	void run() {
 		int horseCount = in.nextInt();
-
 		int horsePower[] = new int[horseCount];
 		for (int horseIdx = 0; horseIdx < horseCount; horseIdx++) {
 			horsePower[horseIdx] = in.nextInt();
@@ -23,9 +24,7 @@ class Solution {
 		int smallestDelta = Integer.MAX_VALUE;
 		for (int horseIdx = 1; horseIdx < horseCount; horseIdx++) {
 			int delta = horsePower[horseIdx] - horsePower[horseIdx - 1];
-			if (smallestDelta > delta) {
-				smallestDelta = delta;
-			}
+			smallestDelta = min(smallestDelta, delta);
 		}
 
 		System.out.println(smallestDelta);

@@ -48,23 +48,19 @@ class Solution {
 	void run() {
 		int wordCount = in.nextInt();
 		Map<String, Record> dictionary = new HashMap<>(wordCount * 2);
-		if (in.hasNextLine()) {
-			in.nextLine();
-		}
-
 		for (int wordIdx = 0; wordIdx < wordCount; wordIdx++) {
-			String word = in.nextLine();
+			String word = in.next();
 			String sortLetters = sortLetters(word);
-			System.err.println("Adding " + word + " -> " + sortLetters);
+			//System.err.println("Adding " + word + " -> " + sortLetters);
 			Record actual = dictionary.get(sortLetters);
 			if (actual == null) {
 				Record record = new Record(word, wordIdx);
 				dictionary.put(sortLetters, record);
 			}
 		}
-		String rawLetters = in.nextLine();
+		String rawLetters = in.next();
 		String sortLetters = sortLetters(rawLetters);
-		System.err.println("Input " + rawLetters + " -> " + sortLetters);
+		//System.err.println("Input " + rawLetters + " -> " + sortLetters);
 
 		Record bestNode = Record.NONE;
 		Collection<String> candidates = new HashSet<>();

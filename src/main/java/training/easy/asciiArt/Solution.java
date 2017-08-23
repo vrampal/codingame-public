@@ -14,10 +14,7 @@ class Solution {
 	void run() {
 		charWidth = in.nextInt();
 		int charHeight = in.nextInt();
-		if (in.hasNextLine()) {
-			in.nextLine();
-		}
-		
+		in.nextLine(); // Eat \n before reading raw lines
 		String textIn = in.nextLine();
 		for (int lineIdx = 0; lineIdx < charHeight; lineIdx++) {
 			String template = in.nextLine();

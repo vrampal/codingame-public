@@ -24,14 +24,14 @@ class Player {
 			int rot = in.nextInt(); // the rotation angle in degrees (-90 to 90).
 			int power = in.nextInt(); // the thrust power (0 to 4).
 
-			int tiltAngle = 0;
-			int trustPower = 0;
+			int angle = 0;
+			int thrustPower = 0;
 			if (vy < MIN_VERT_SPEED) {
-				trustPower = 4;
+				thrustPower = 4;
 			}
 
 			// R P. R is the desired rotation angle. P is the desired thrust power.
-			System.out.println(tiltAngle + " " + trustPower);
+			System.out.println(angle + " " + thrustPower);
 		}
 	}
 

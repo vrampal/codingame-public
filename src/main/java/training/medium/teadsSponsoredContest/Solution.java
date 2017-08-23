@@ -63,7 +63,7 @@ class Graph {
 	}
 
 	void removeNode(Node node) {
-		System.err.println("Removing node " + node.id);
+		//System.err.println("Removing node " + node.id);
 		nodesById.remove(node.id);
 		for (Node other : node.adj) {
 			other.adj.remove(node);
@@ -87,7 +87,7 @@ class Solution {
 			int xi = in.nextInt(); // the ID of a person which is adjacent to yi
 			int yi = in.nextInt(); // the ID of a person which is adjacent to xi
 			graph.createEdge(xi, yi);
-			System.err.println("Edge " + xi + " - " + yi);
+			//System.err.println("Edge " + xi + " - " + yi);
 		}
 		
 		int reduce = graph.reduce();

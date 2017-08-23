@@ -3,14 +3,21 @@ package training.medium.telephoneNumbers;
 import java.util.*;
 
 class LexiNode {
-	final Map<Character, LexiNode> subNodesByLetter = new TreeMap<>();
+	Map<Character, LexiNode> subNodesByLetter = Collections.emptyMap();
+
+	void addSubNode(char ch, LexiNode node)  {
+		if (subNodesByLetter.isEmpty()) {
+			subNodesByLetter = new HashMap<>();
+		}
+		subNodesByLetter.put(ch, node);
+	}
 }
 
 class LexiTree {
 	final LexiNode root = new LexiNode();
-	
+
 	int nodeCount = 0;
-	
+
 	LexiNode get(String word) {
 		LexiNode currNode = root;
 		for (int charIdx = 0; ((charIdx < word.length()) && (currNode != null)); charIdx++) {
@@ -19,7 +26,7 @@ class LexiTree {
 		}
 		return currNode;
 	}
-	
+
 	LexiNode put(String word) {
 		LexiNode curNode = root;
 		for (int charIdx = 0; charIdx < word.length(); charIdx++) {
@@ -27,7 +34,7 @@ class LexiTree {
 			LexiNode nextNode = curNode.subNodesByLetter.get(ch);
 			if (nextNode == null) {
 				nextNode = new LexiNode();
-				curNode.subNodesByLetter.put(ch, nextNode);
+				curNode.addSubNode(ch, nextNode);
 				nodeCount++;
 			}
 			curNode = nextNode;
@@ -46,7 +53,7 @@ class Solution {
 
 	void run() {
 		LexiTree lexiTree = new LexiTree();
-		
+
 		int telCount = in.nextInt();
 		for (int i = 0; i < telCount; i++) {
 			String telWord = in.next();

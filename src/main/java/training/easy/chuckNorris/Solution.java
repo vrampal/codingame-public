@@ -42,6 +42,7 @@ class Solution {
 
 	void run() {
 		String message = in.nextLine();
+		//System.err.println(message);
 		Splitter splitter = new Splitter(message);
 		StringBuilder buffOut = new StringBuilder();
 		encode(splitter, buffOut);

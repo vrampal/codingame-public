@@ -34,7 +34,7 @@ class Solution {
 		}
 
 		long n1 = readNumber();
-		System.err.println("---");
+		//System.err.println("---");
 		long n2 = readNumber();
 		String operation = in.next();
 		long result = 0;
@@ -46,7 +46,7 @@ class Solution {
 		case '-': result = n1 - n2; break;
 		}
 		
-		System.err.println(n1 + " " + operation + " " + n2 + " = " + result);
+		//System.err.println(n1 + " " + operation + " " + n2 + " = " + result);
 		
 		Deque<Integer> decomp = new LinkedList<>();
 		if (result == 0) {
@@ -60,7 +60,7 @@ class Solution {
 		}
 		
 		for (int digit : decomp) {
-			System.err.println("Out " + digit);
+			//System.err.println("Out " + digit);
 			List<String> pattern = patternsByDigit.get(digit);
 			for (int rowIdx = 0; rowIdx < height; rowIdx++) {
 				System.out.println(pattern.get(rowIdx));
@@ -90,7 +90,7 @@ class Solution {
 			if ((rowIdx % height) == 0) {
 				List<String> pattern = extractPattern(numRaw, 0);
 				int digit = digitsByPattern.get(pattern);
-				System.err.println("In " + digit);
+				//System.err.println("In " + digit);
 				number = (number * BASE) + digit;
 				numRaw.clear();
 			}

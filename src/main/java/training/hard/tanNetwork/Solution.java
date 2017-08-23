@@ -70,9 +70,7 @@ class Graph {
 
 	Graph(Scanner in) {
 		int stopCnt = in.nextInt();
-		if (in.hasNextLine()) {
-			in.nextLine();
-		}
+		in.nextLine(); // Eat \n before reading raw lines
 		stopsById = new HashMap<>(stopCnt * 2);
 		for (int stopIdx = 0; stopIdx < stopCnt; stopIdx++) {
 			BusStop stop = new BusStop(in);
