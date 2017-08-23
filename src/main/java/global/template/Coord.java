@@ -224,7 +224,7 @@ class Segment {
 	 * @return 1 when clockwise, 0 when colinear, -1 when counterclockwise.
 	 */
 	int orientation(Coord pos) {
-		double val = (to.y - from.y) * (pos.x - to.x) - (to.x - from.x) * (pos.y - to.y);
+		int val = (to.y - from.y) * (pos.x - to.x) - (to.x - from.x) * (pos.y - to.y);
 		return (val > 0) ? 1 : ((val < 0) ? -1 : 0);
 	}
 
