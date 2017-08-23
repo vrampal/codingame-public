@@ -26,10 +26,10 @@ class Coord {
 	}
 
 	public int hashCode() {
-		final int prime = 31;
+		final int PRIME = 31;
 		int result = 1;
-		result = prime * result + x;
-		result = prime * result + y;
+		result = PRIME * result + x;
+		result = PRIME * result + y;
 		return result;
 	}
 
@@ -138,13 +138,13 @@ class Bender {
 	}
 
 	public int hashCode() {
-		final int prime = 31;
+		final int PRIME = 31;
 		int result = 1;
-		result = prime * result + breakCount;
-		result = prime * result + (breakMode ? 1231 : 1237);
-		result = prime * result + ((dir == null) ? 0 : dir.hashCode());
-		result = prime * result + (inverted ? 1231 : 1237);
-		result = prime * result + ((pos == null) ? 0 : pos.hashCode());
+		result = PRIME * result + breakCount;
+		result = PRIME * result + (breakMode ? 1231 : 1237);
+		result = PRIME * result + ((dir == null) ? 0 : dir.hashCode());
+		result = PRIME * result + (inverted ? 1231 : 1237);
+		result = PRIME * result + ((pos == null) ? 0 : pos.hashCode());
 		return result;
 	}
 
