@@ -10,6 +10,7 @@ class Board {
 	private Board(int width, int height) {
 		this.width = width;
 		this.height = height;
+		//System.err.println(width + " " + height);
 		rows = new StringBuilder[height];
 	}
 
@@ -17,6 +18,7 @@ class Board {
 		this(in.nextInt(), in.nextInt());
 		for (int rowIdx = 0; rowIdx < height; rowIdx++) {
 			String line = in.next();
+			//System.err.println(line);
 			rows[rowIdx] = new StringBuilder(line);
 		}
 	}
@@ -42,26 +44,19 @@ class Solution {
 		Board board = new Board(in);
 
 		for (int x = 0; x < board.width; x++) {
-			int dot = 0;
-			int sharp = 0;
+			int dotCnt = 0;
 			for (int y = 0; y < board.height; y++) {
-				char ch = board.getCell(x, y);
-				if (ch == '.') {
-					dot++;
-				} else if (ch == '#') {
-					sharp++;
+				if (board.getCell(x, y) == '.') {
+					dotCnt++;
 				}
 			}
-			int y = 0;
-			while (dot > 0) {
+
+			int y;
+			for(y = 0; y < dotCnt; y++) {
 				board.setCell(x, y, '.');
-				y++;
-				dot--;
 			}
-			while (sharp > 0) {
+			for (; y < board.height; y++) {
 				board.setCell(x, y, '#');
-				y++;
-				sharp--;
 			}
 		}
 

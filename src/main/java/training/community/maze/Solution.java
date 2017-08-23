@@ -127,17 +127,17 @@ class Solution {
 				exitList.add(pos);
 			}
 		}
-		for (int colIdx = 0; colIdx < board.height; colIdx++) {
+		for (int colIdx = 1; colIdx < board.width; colIdx++) {
 			Coord pos = new Coord(colIdx, 0);
 			if (board.getCellAt(pos) == Board.MARKED) {
 				exitList.add(pos);
 			}
-			pos = new Coord(colIdx, board.height - 1);
+			pos = new Coord(colIdx, board.width - 1);
 			if (board.getCellAt(pos) == Board.MARKED) {
 				exitList.add(pos);
 			}
 		}
-		for (int rowIdx = 0; rowIdx < board.height; rowIdx++) {
+		for (int rowIdx = 1; rowIdx < board.height; rowIdx++) {
 			Coord pos = new Coord(board.width - 1, rowIdx);
 			if (board.getCellAt(pos) == Board.MARKED) {
 				exitList.add(pos);
