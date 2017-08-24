@@ -287,12 +287,18 @@ class Board {
 	Coord findFirst(char target) {
 		for (int colIdx = 0; colIdx < width; colIdx++) {
 			for (int rowIdx = 0; rowIdx < height; rowIdx++) {
-				char val = cells[rowIdx].charAt(colIdx);
+				char val = getCellAt(rowIdx, colIdx);
 				if (val == target) {
 					return new Coord(colIdx, rowIdx);
 				}
 			}
 		}
 		return null;
+	}
+
+	void debugPrint() {
+		for (StringBuilder row : cells) {
+			System.err.println(row);
+		}
 	}
 }
