@@ -296,6 +296,19 @@ class Board {
 		return null;
 	}
 
+	int count(char target) {
+		int count = 0;
+		for (int colIdx = 0; colIdx < width; colIdx++) {
+			for (int rowIdx = 0; rowIdx < height; rowIdx++) {
+				char val = getCellAt(rowIdx, colIdx);
+				if (val == target) {
+					count++;
+				}
+			}
+		}
+		return count;
+	}
+
 	void debugPrint() {
 		for (StringBuilder row : cells) {
 			System.err.println(row);

@@ -66,8 +66,8 @@ class Player {
 		int[][] data = generateData();
 		long tStart = System.nanoTime();
 
-		List<Runnable> tasks = new ArrayList<>();
-		List<Thread> threads = new ArrayList<>();
+		List<Runnable> tasks = new ArrayList<>(threadCount);
+		List<Thread> threads = new ArrayList<>(threadCount);
 		int begin = 0;
 		for (int i = 0; i < threadCount; i++) {
 			int end = (SIZE * (i + 1)) / threadCount;
