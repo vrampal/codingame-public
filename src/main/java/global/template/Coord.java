@@ -203,13 +203,13 @@ class Segment {
 		this.from = from;
 		this.to = to;
 	}
-	
+
 	Coord middle() {
 		int newX = (from.x + to.x) / 2;
 		int newY = (from.y + to.y) / 2;
 		return new Coord(newX, newY);
 	}
-	
+
 	/**
 	 * Check if a point is inside a bounding box.
 	 * @return true if and only if inside.
@@ -244,5 +244,55 @@ class Segment {
 
 	public String toString() {
 		return from + "-" + to;
+	}
+}
+
+class Board {
+	final int width;
+	final int height;
+	private final StringBuilder[] cells;
+
+	Board(int width, int height) {
+		this.width = width;
+		this.height = height;
+		cells = new StringBuilder[height];
+	}
+
+	Board(Scanner in) {
+		this(in.nextInt(), in.nextInt());
+		//System.err.println(height + " " + width);
+		for (int rowIdx = 0; rowIdx < height; rowIdx++) {
+			String row = in.next();
+			//System.err.println(row);
+			cells[rowIdx] = new StringBuilder(row);
+		}
+	}
+
+	boolean cellExist(Coord pos) {
+		return ((pos.y >= 0) && (pos.y < height) && (pos.x >= 0) && (pos.x < width));
+	}
+
+	private char getCellAt(int row, int col) {
+		return cells[row].charAt(col);
+	}
+
+	char getCellAt(Coord pos) {
+		return getCellAt(pos.y, pos.x);
+	}
+
+	void setCellAt(Coord pos, char val) {
+		cells[pos.y].setCharAt(pos.x, val);
+	}
+
+	Coord findFirst(char target) {
+		for (int colIdx = 0; colIdx < width; colIdx++) {
+			for (int rowIdx = 0; rowIdx < height; rowIdx++) {
+				char val = cells[rowIdx].charAt(colIdx);
+				if (val == target) {
+					return new Coord(colIdx, rowIdx);
+				}
+			}
+		}
+		return null;
 	}
 }

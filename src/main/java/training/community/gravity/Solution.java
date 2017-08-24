@@ -10,24 +10,24 @@ class Board {
 	private Board(int width, int height) {
 		this.width = width;
 		this.height = height;
-		//System.err.println(width + " " + height);
 		rows = new StringBuilder[height];
 	}
 
 	Board(Scanner in) {
 		this(in.nextInt(), in.nextInt());
+		//System.err.println(width + " " + height);
 		for (int rowIdx = 0; rowIdx < height; rowIdx++) {
-			String line = in.next();
+			String row = in.next();
 			//System.err.println(line);
-			rows[rowIdx] = new StringBuilder(line);
+			rows[rowIdx] = new StringBuilder(row);
 		}
 	}
 
-	char getCell(int x, int y) {
+	char getCellAt(int x, int y) {
 		return rows[y].charAt(x);
 	}
 
-	void setCell(int x, int y, char ch) {
+	void setCellAt(int x, int y, char ch) {
 		rows[y].setCharAt(x, ch);
 	}
 }
@@ -46,17 +46,17 @@ class Solution {
 		for (int x = 0; x < board.width; x++) {
 			int dotCnt = 0;
 			for (int y = 0; y < board.height; y++) {
-				if (board.getCell(x, y) == '.') {
+				if (board.getCellAt(x, y) == '.') {
 					dotCnt++;
 				}
 			}
 
 			int y;
 			for(y = 0; y < dotCnt; y++) {
-				board.setCell(x, y, '.');
+				board.setCellAt(x, y, '.');
 			}
 			for (; y < board.height; y++) {
-				board.setCell(x, y, '#');
+				board.setCellAt(x, y, '#');
 			}
 		}
 

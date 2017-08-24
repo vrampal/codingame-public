@@ -88,13 +88,11 @@ class Board {
 	
 	final int width;
 	final int height;
-	
 	private final Cell[][] cells;
 
 	private Board(int width, int height) {
 		this.width = width;
 		this.height = height;
-		//System.err.println(height + " " + width);
 		cells = new Cell[height][];
 		for (int rowIdx = 0; rowIdx < height; rowIdx++) {
 			cells[rowIdx] = new Cell[width];
@@ -103,6 +101,7 @@ class Board {
 	
 	Board(Scanner in) {
 		this(in.nextInt(), in.nextInt());
+		//System.err.println(height + " " + width);
 		for (int rowIdx = 0; rowIdx < height; rowIdx++) {
 			for (int colIdx = 0; colIdx < width; colIdx++) {
 				int n = in.nextInt();

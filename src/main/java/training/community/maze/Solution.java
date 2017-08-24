@@ -43,7 +43,6 @@ class Board {
 
 	final int width;
 	final int height;
-
 	private final StringBuilder[] cells;
 
 	Board(int width, int height) {
@@ -55,6 +54,7 @@ class Board {
 	
 	Board(Scanner in) {
 		this(in.nextInt(), in.nextInt());
+		//System.err.println(width + " " + height);
 		// Warning: board content is not immediately after size!
 	}
 

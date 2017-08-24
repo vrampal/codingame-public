@@ -22,18 +22,17 @@ class Board {
 
 	final int width;
 	final int height;
-
 	private final String[] cells;
 
 	Board(int width, int height) {
 		this.width = width;
 		this.height = height;
-		//System.err.println(height + " " + width);
 		cells = new String[height];
 	}
 	
 	Board(Scanner in) {
 		this(in.nextInt(), in.nextInt());
+		//System.err.println(height + " " + width);
 		for (int rowIdx = 0; rowIdx < height; rowIdx++) {
 			String row = in.next();
 			//System.err.println(row);
@@ -50,18 +49,18 @@ class Board {
 	}
 
 	Coord searchRight(Coord from) {
-		for (int col = from.x + 1; col < width; col++) {
-			if (isPowerNode(col, from.y)) {
-				return new Coord(col, from.y);
+		for (int colIdx = from.x + 1; colIdx < width; colIdx++) {
+			if (isPowerNode(colIdx, from.y)) {
+				return new Coord(colIdx, from.y);
 			}
 		}
 		return NONE;
 	}
 
 	Coord searchDown(Coord from) {
-		for (int row = from.y + 1; row < height; row++) {
-			if (isPowerNode(from.x, row)) {
-				return new Coord(from.x, row);
+		for (int rowIdx = from.y + 1; rowIdx < height; rowIdx++) {
+			if (isPowerNode(from.x, rowIdx)) {
+				return new Coord(from.x, rowIdx);
 			}
 		}
 		return NONE;

@@ -5,7 +5,7 @@ import java.util.*;
 class Board {
 	final int width;
 	final int height;
-	final String[] rows;
+	private final String[] rows;
 
 	private Board(int width, int height) {
 		this.width = width;
@@ -15,6 +15,7 @@ class Board {
 
 	Board(Scanner in) {
 		this(in.nextInt(), in.nextInt());
+		//System.err.println(width + " " + height);
 		for (int rowIdx = 0; rowIdx < height; rowIdx++) {
 			rows[rowIdx] = in.next();
 		}

@@ -49,18 +49,17 @@ class Coord {
 class Board {
 	final int height;
 	final int width;
-
 	private final StringBuilder[] cells;
 
 	Board(int height, int width) {
 		this.height = height;
 		this.width = width;
-		//System.err.println(height + " " + width);
 		cells = new StringBuilder[height];
 	}
 	
 	Board(Scanner in) {
 		this(in.nextInt(), in.nextInt());
+		//System.err.println(height + " " + width);
 		in.nextLine(); // Eat \n before reading raw lines
 		for (int rowIdx = 0; rowIdx < height; rowIdx++) {
 			String row = in.nextLine();
@@ -82,27 +81,27 @@ class Board {
 	}
 
 	Coord findFirst(char target) {
-		for (int col = 0; col < width; col++) {
-			for (int row = 0; row < height; row++) {
-				char val = getCellAt(row, col);
+		for (int colIdx = 0; colIdx < width; colIdx++) {
+			for (int rowIdx = 0; rowIdx < height; rowIdx++) {
+				char val = getCellAt(rowIdx, colIdx);
 				if (val == target) {
-					return new Coord(col, row);
+					return new Coord(colIdx, rowIdx);
 				}
 			}
 		}
-		throw new RuntimeException("Can't find first " + target);
+		return null;
 	}
 
 	Coord findSecond(char target, Coord first) {
-		for (int col = 0; col < width; col++) {
-			for (int row = 0; row < height; row++) {
-				char val = getCellAt(row, col);
-				if ((val == target) && ((col != first.x) || (row != first.y))) {
-					return new Coord(col, row);
+		for (int colIdx = 0; colIdx < width; colIdx++) {
+			for (int rowIdx = 0; rowIdx < height; rowIdx++) {
+				char val = getCellAt(rowIdx, colIdx);
+				if ((val == target) && ((colIdx != first.x) || (rowIdx != first.y))) {
+					return new Coord(colIdx, rowIdx);
 				}
 			}
 		}
-		throw new RuntimeException("Can't find second " + target);
+		return null;
 	}
 }
 
