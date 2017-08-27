@@ -16,21 +16,21 @@ public class SolutionTest {
 	@Test
 	public void test1a() {
 		Splitter splitter = new Splitter("C");
-		assertTrue(splitter.hasNextBit());
+		assertEquals(true, splitter.hasNextBit());
 		assertEquals(1, splitter.getNextBit());
-		assertTrue(splitter.hasNextBit());
+		assertEquals(true, splitter.hasNextBit());
 		assertEquals(0, splitter.getNextBit());
-		assertTrue(splitter.hasNextBit());
+		assertEquals(true, splitter.hasNextBit());
 		assertEquals(0, splitter.getNextBit());
-		assertTrue(splitter.hasNextBit());
+		assertEquals(true, splitter.hasNextBit());
 		assertEquals(0, splitter.getNextBit());
-		assertTrue(splitter.hasNextBit());
+		assertEquals(true, splitter.hasNextBit());
 		assertEquals(0, splitter.getNextBit());
-		assertTrue(splitter.hasNextBit());
+		assertEquals(true, splitter.hasNextBit());
 		assertEquals(1, splitter.getNextBit());
-		assertTrue(splitter.hasNextBit());
+		assertEquals(true, splitter.hasNextBit());
 		assertEquals(1, splitter.getNextBit());
-		assertFalse(splitter.hasNextBit());
+		assertEquals(false, splitter.hasNextBit());
 	}
 
 	@Test
@@ -44,35 +44,35 @@ public class SolutionTest {
 	@Test
 	public void test2a() {
 		Splitter splitter = new Splitter("CC");
-		assertTrue(splitter.hasNextBit());
+		assertEquals(true, splitter.hasNextBit());
 		assertEquals(1, splitter.getNextBit());
-		assertTrue(splitter.hasNextBit());
+		assertEquals(true, splitter.hasNextBit());
 		assertEquals(0, splitter.getNextBit());
-		assertTrue(splitter.hasNextBit());
+		assertEquals(true, splitter.hasNextBit());
 		assertEquals(0, splitter.getNextBit());
-		assertTrue(splitter.hasNextBit());
+		assertEquals(true, splitter.hasNextBit());
 		assertEquals(0, splitter.getNextBit());
-		assertTrue(splitter.hasNextBit());
+		assertEquals(true, splitter.hasNextBit());
 		assertEquals(0, splitter.getNextBit());
-		assertTrue(splitter.hasNextBit());
+		assertEquals(true, splitter.hasNextBit());
 		assertEquals(1, splitter.getNextBit());
-		assertTrue(splitter.hasNextBit());
+		assertEquals(true, splitter.hasNextBit());
 		assertEquals(1, splitter.getNextBit());
-		assertTrue(splitter.hasNextBit());
+		assertEquals(true, splitter.hasNextBit());
 		assertEquals(1, splitter.getNextBit());
-		assertTrue(splitter.hasNextBit());
+		assertEquals(true, splitter.hasNextBit());
 		assertEquals(0, splitter.getNextBit());
-		assertTrue(splitter.hasNextBit());
+		assertEquals(true, splitter.hasNextBit());
 		assertEquals(0, splitter.getNextBit());
-		assertTrue(splitter.hasNextBit());
+		assertEquals(true, splitter.hasNextBit());
 		assertEquals(0, splitter.getNextBit());
-		assertTrue(splitter.hasNextBit());
+		assertEquals(true, splitter.hasNextBit());
 		assertEquals(0, splitter.getNextBit());
-		assertTrue(splitter.hasNextBit());
+		assertEquals(true, splitter.hasNextBit());
 		assertEquals(1, splitter.getNextBit());
-		assertTrue(splitter.hasNextBit());
+		assertEquals(true, splitter.hasNextBit());
 		assertEquals(1, splitter.getNextBit());
-		assertFalse(splitter.hasNextBit());
+		assertEquals(false, splitter.hasNextBit());
 	}
 
 	@Test

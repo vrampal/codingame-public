@@ -45,7 +45,7 @@ class Board {
 	final int height;
 	private final StringBuilder[] cells;
 
-	Board(int width, int height) {
+	private Board(int width, int height) {
 		this.width = width;
 		this.height = height;
 		//System.err.println(height + " " + width);

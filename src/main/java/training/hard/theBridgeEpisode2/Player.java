@@ -77,7 +77,7 @@ class Bike {
 	}
 
 	public String toString() {
-		return x + " " + y + " " + isAlive;
+		return "[" + x + ",  " + y + ",  " + isAlive + "]";
 	}
 }
 

@@ -5,7 +5,7 @@ import static java.lang.Math.*;
 import java.util.*;
 
 enum Direction4 {
-	N, E, S, W;
+	N, E, S, W; // TODO control name and order
 	//NORTH, EAST, SOUTH, WEST;
 	//UP, RIGHT, DOWN, LEFT;
 	//TOP, RIGHT, BOTTOM, LEFT;
@@ -24,7 +24,7 @@ enum Direction4 {
 }
 
 enum Direction6 {
-	NE, E, SE, SW, W, NW;
+	NE, E, SE, SW, W, NW; // TODO control name and order
 
 	Direction6 cw() {
 		return values()[(ordinal() + 1) % 6];
@@ -48,7 +48,7 @@ enum Direction6 {
 }
 
 enum Direction8 {
-	N, NE, E, SE, S, SW, W, NW;
+	N, NE, E, SE, S, SW, W, NW; // TODO control name and order
 
 	Direction8 cw() {
 		return values()[(ordinal() + 1) % 8];
@@ -136,26 +136,18 @@ class Coord {
 		}
 	}
 
-	Coord add(Coord other) {
-		return new Coord(x + other.x, y + other.y);
-	}
-
-	Coord sub(Coord other) {
-		return new Coord(x - other.x, y - other.y);
-	}
-
-	Coord mult(double scale) {
-		int newX = (int) rint(x * scale);
-		int nexY = (int) rint(y * scale);
-		return new Coord(newX, nexY);
-	}
-
 	// Manhattan distance (for 4 directions maps)
 	// see: https://en.wikipedia.org/wiki/Taxicab_geometry
 	int distanceMan(Coord other) {
 		int deltaX = abs(x - other.x);
 		int deltaY = abs(y - other.y);
 		return deltaX + deltaY;
+	}
+
+	// Hexagonal distance (for 6 direction maps)
+	// http://www.redblobgames.com/grids/hexagons/
+	int distanceHexa(Coord other) {
+		return toCubeCoord().distanceHexa(other.toCubeCoord());
 	}
 
 	// Chebyshev distance (for 8 directions maps)
@@ -174,6 +166,13 @@ class Coord {
 		return sqrt(((double)deltaX * deltaX) + ((double)deltaY * deltaY));
 	}
 
+	CubeCoord toCubeCoord() {
+		int newX = x - (y - (y & 1)) / 2;
+		int newZ = y;
+		int newY = -(newX + newZ);
+		return new CubeCoord(newX, newY, newZ);
+	}		
+
 	public int hashCode() {
 		final int PRIME = 31;
 		int result = 1;
@@ -191,7 +190,66 @@ class Coord {
 	}
 
 	public String toString() {
+		//return x + " " + y; // TODO change if you use Coord in System.out
 		return "[" + x + ", " + y + "]";
+	}
+}
+
+class CubeCoord {
+	final int x;
+	final int y;
+	final int z;
+
+	public CubeCoord(int x, int y, int z) {
+		this.x = x;
+		this.y = y;
+		this.z = z;
+	}
+
+	Coord toOffsetCoord() {
+		int newX = x + (z - (z & 1)) / 2;
+		int newY = z;
+		return new Coord(newX, newY);
+	}
+
+	CubeCoord add(Direction6 dir) {
+		switch (dir) {
+		case NE: return new CubeCoord(x + 1, y,     z - 1);
+		case E:  return new CubeCoord(x + 1, y - 1, z);
+		case SE: return new CubeCoord(x,     y - 1, z + 1);
+		case SW: return new CubeCoord(x - 1, y,     z + 1);
+		case W:  return new CubeCoord(x - 1, y + 1, z);
+		case NW: return new CubeCoord(x,     y + 1, z - 1);
+		default: throw new IllegalArgumentException("Invalid dir: " + dir);
+		}
+	}
+
+	int distanceHexa(CubeCoord other) {
+		int deltaX = abs(x - other.x);
+		int deltaY = abs(y - other.y);
+		int deltaZ = abs(z - other.z);
+		return (deltaX + deltaY + deltaZ) / 2;
+	}
+
+	public int hashCode() {
+		final int PRIME = 31;
+		int result = 1;
+		result = PRIME * result + x;
+		result = PRIME * result + y;
+		result = PRIME * result + x;
+		return result;
+	}
+
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+		if (obj == null) return false;
+		if (getClass() != obj.getClass()) return false;
+		CubeCoord other = (CubeCoord) obj;
+		return (x == other.x) && (y == other.y) && (z == other.z);
+	}
+
+	public String toString() {
+		return "[" + x + ",  " + y +  ",  " + z + "]";
 	}
 }
 
@@ -204,34 +262,20 @@ class Segment {
 		this.to = to;
 	}
 
-	Coord middle() {
-		int newX = (from.x + to.x) / 2;
-		int newY = (from.y + to.y) / 2;
-		return new Coord(newX, newY);
-	}
-
-	/**
-	 * Check if a point is inside a bounding box.
-	 * @return true if and only if inside.
-	 */
+	// Check if a point is inside a bounding box
 	boolean inBoundingBox(Coord pos) {
 		return min(from.x, to.x) <= pos.x && pos.x <= max(from.x, to.x)
 				&& min(from.y, to.y) <= pos.y && pos.y <= max(from.y, to.y);
 	}
 
-	/**
-	 * Find the orientation of the triplet (from, to, pos).
-	 * @return 1 when clockwise, 0 when colinear, -1 when counterclockwise.
-	 */
+	// Find the orientation of the triplet (from, to, pos)
+	// Returns 1 when clockwise, 0 when colinear, -1 when counterclockwise
 	int orientation(Coord pos) {
 		int val = (to.y - from.y) * (pos.x - to.x) - (to.x - from.x) * (pos.y - to.y);
 		return (val > 0) ? 1 : ((val < 0) ? -1 : 0);
 	}
 
-	/**
-	 * Test of 2 segments intersects.
-	 * @return true if and only if segments intersects.
-	 */
+	// Test if 2 segments intersects
 	boolean intersect(Segment other) {
 		int o1 = orientation(other.from);
 		int o2 = orientation(other.to);
@@ -252,7 +296,7 @@ class Board {
 	final int height;
 	private final StringBuilder[] cells;
 
-	Board(int width, int height) {
+	private Board(int width, int height) {
 		this.width = width;
 		this.height = height;
 		cells = new StringBuilder[height];
@@ -261,8 +305,9 @@ class Board {
 	Board(Scanner in) {
 		this(in.nextInt(), in.nextInt());
 		//System.err.println(height + " " + width);
+		// TODO split here is content is not right after size
 		for (int rowIdx = 0; rowIdx < height; rowIdx++) {
-			String row = in.next();
+			String row = in.next(); // TODO use in.nextLine() if the line contains spaces
 			//System.err.println(row);
 			cells[rowIdx] = new StringBuilder(row);
 		}

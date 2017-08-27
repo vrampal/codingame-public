@@ -17,11 +17,11 @@ public class SolutionTest {
 		possible.add("abcde");
 
 		possible = solution.shorterWords(possible);
-		assertTrue(possible.contains("bcde"));
-		assertTrue(possible.contains("acde"));
-		assertTrue(possible.contains("abde"));
-		assertTrue(possible.contains("abce"));
-		assertTrue(possible.contains("abcd"));
+		assertEquals(true, possible.contains("bcde"));
+		assertEquals(true, possible.contains("acde"));
+		assertEquals(true, possible.contains("abde"));
+		assertEquals(true, possible.contains("abce"));
+		assertEquals(true, possible.contains("abcd"));
 	}
 
 }

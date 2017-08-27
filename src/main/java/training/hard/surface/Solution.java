@@ -55,7 +55,7 @@ class Board {
 		this.height = height;
 		//System.err.println(height + " " + width);
 		cells = new String[height];
-		zones = new Zone[height][]; 
+		zones = new Zone[height][];
 		for (int rowIdx = 0; rowIdx < height; rowIdx++) {
 			zones[rowIdx] = new Zone[width];
 		}
