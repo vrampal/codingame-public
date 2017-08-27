@@ -291,15 +291,24 @@ class Segment {
 	}
 }
 
+class Zone {
+	final Collection<Coord> cells = new HashSet<>();
+}
+
 class Board {
 	final int width;
 	final int height;
 	private final StringBuilder[] cells;
+	private final Zone[][] zones;
 
 	private Board(int width, int height) {
 		this.width = width;
 		this.height = height;
 		cells = new StringBuilder[height];
+		zones = new Zone[height][];
+		for (int rowIdx = 0; rowIdx < height; rowIdx++) {
+			zones[rowIdx] = new Zone[width];
+		}
 	}
 
 	Board(Scanner in) {
@@ -352,6 +361,42 @@ class Board {
 			}
 		}
 		return count;
+	}
+
+	boolean canWalkOn(Coord pos) {
+		return (cellExist(pos) && (getCellAt(pos) != '#')); // TODO modify depending of the game
+	}
+
+	Zone getZoneAt(Coord pos) {
+		if (!canWalkOn(pos)) {
+			return new Zone();
+		}
+		Zone zone = zones[pos.y][pos.x];
+		if (zone != null) {
+			return zone;
+		}
+		return floodFill(pos);
+	}
+
+	private Zone floodFill(Coord start) {
+		Zone zone = new Zone();
+		Queue<Coord> toFill = new ArrayDeque<>();
+		toFill.add(start);
+		while (!toFill.isEmpty()) {
+			Coord pos = toFill.poll();
+			if (zones[pos.y][pos.x] == null) {
+				zones[pos.y][pos.x] = zone;
+				zone.cells.add(pos);
+				for (Direction4 dir : Direction4.values()) { // TODO modify depending of the game
+					Coord nextPos = pos.add(dir);
+					if (canWalkOn(nextPos)) {
+						// Note: queue may contains duplicates
+						toFill.add(nextPos);
+					}
+				}
+			}
+		}
+		return zone;
 	}
 
 	void debugPrint() {

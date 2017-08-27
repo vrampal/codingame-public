@@ -75,7 +75,7 @@ public class CoordTest {
 		// Conversions
 		assertEquals(pos1Cube, pos1.toCubeCoord());
 		assertEquals(pos2Cube, pos2.toCubeCoord());
-		
+
 		assertEquals(pos1, pos1Cube.toOffsetCoord());
 		assertEquals(pos2, pos2Cube.toOffsetCoord());
 
@@ -85,7 +85,7 @@ public class CoordTest {
 
 		assertEquals(9, pos1Cube.distanceHexa(pos2Cube));
 		assertEquals(9, pos2Cube.distanceHexa(pos1Cube));
-		
+
 		assertEquals(9, pos1.distanceHexa(pos2));
 		assertEquals(9, pos2.distanceHexa(pos1));
 
@@ -105,16 +105,16 @@ public class CoordTest {
 
 		assertEquals(true, pos1.equals(pos3));
 		assertEquals(true, pos3.equals(pos1));
-		
+
 		assertEquals(true, pos1.equals(pos1));
 		assertEquals(false, pos1.equals(null));
-		
+
 		// hashCode equals on CubeCoord
 		assertEquals(false, pos1Cube.hashCode() == pos2Cube.hashCode());
 
 		assertEquals(false, pos1Cube.equals(pos2Cube));
 		assertEquals(false, pos2Cube.equals(pos1Cube));
-		
+
 		assertEquals(true, pos1Cube.hashCode() == pos3Cube.hashCode());
 
 		assertEquals(true, pos1Cube.equals(pos3Cube));
@@ -130,7 +130,7 @@ public class CoordTest {
 		Coord pos1N = new Coord(8, 2);
 		Coord pos1NE = new Coord(9, 2);
 		Coord pos2E = new Coord(9, 3);
-		
+
 		CubeCoord posCube = pos1.toCubeCoord();
 		CubeCoord posNECube = pos1NE.toCubeCoord();
 		CubeCoord posECube = pos2E.toCubeCoord();
@@ -195,38 +195,47 @@ public class CoordTest {
 		assertEquals(false, s4.intersect(s6));
 		assertEquals(false, s6.intersect(s4));
 	}
-	
+
 	@Test
 	public void testBoard() throws IOException {
 		Board board = new Board(new Scanner(new File("data/boardTest-01.txt")));
 
 		assertEquals(34, board.width);
 		assertEquals(19, board.height);
-		
+
 		Coord pos1 = new Coord(7, 12);
 		Coord pos2 = new Coord(27, 3);
 		Coord pos3 = new Coord(0, 0);
 		Coord pos4 = new Coord(33, 18);
-		
+
 		assertEquals(true, board.cellExist(pos1));
 		assertEquals(true, board.cellExist(pos2));
 		assertEquals(true, board.cellExist(pos3));
 		assertEquals(true, board.cellExist(pos4));
-		
+
 		assertEquals(false, board.cellExist(new Coord(-2, 3)));
 		assertEquals(false, board.cellExist(new Coord(3, -2)));
 		assertEquals(false, board.cellExist(new Coord(72, 3)));
 		assertEquals(false, board.cellExist(new Coord(3, 72)));
-		
+
 		assertEquals('1', board.getCellAt(pos1));
 		assertEquals('2', board.getCellAt(pos2));
 		assertEquals('3', board.getCellAt(pos3));
 		assertEquals('4', board.getCellAt(pos4));
-		
+
 		assertEquals(pos1, board.findFirst('1'));
 		assertEquals(pos2, board.findFirst('2'));
 		assertEquals(null, board.findFirst('5'));
-		
+
+		Zone zone1 = board.getZoneAt(pos1);
+		Zone zone2 = board.getZoneAt(pos2);
+		assertSame(zone1, zone2);
+
+		Zone zone3 = board.getZoneAt(new Coord(17, 15));
+		Zone zone4 = board.getZoneAt(new Coord(4, 16));
+		assertEquals(35, zone3.cells.size());
+		assertEquals(1, zone4.cells.size());
+
 		board.setCellAt(pos1, 'A');
 		board.setCellAt(pos2, 'B');
 

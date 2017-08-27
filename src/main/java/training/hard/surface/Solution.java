@@ -37,12 +37,11 @@ class Coord {
 }
 
 class Zone {
-	int size = 0;
+	final Collection<Coord> cells = new HashSet<>();
 }
 
 class Board {
 	static final char WATER = 'O';
-	static final Zone NONE = new Zone();
 
 	final int width;
 	final int height;
@@ -80,12 +79,12 @@ class Board {
 	}
 	
 	boolean isWater(Coord pos) {
-		return (getCellAt(pos) == WATER);
+		return (cellExist(pos) && (getCellAt(pos) == WATER));
 	}
 	
 	Zone getZoneAt(Coord pos) {
 		if (!isWater(pos)) {
-			return NONE;
+			return new Zone();
 		}
 		Zone zone = zones[pos.y][pos.x];
 		if (zone != null) {
@@ -102,12 +101,12 @@ class Board {
 			Coord pos = toFill.poll();
 			if (zones[pos.y][pos.x] == null) {
 				zones[pos.y][pos.x] = zone;
-				zone.size++;
+				zone.cells.add(pos);
 				for (Direction dir : Direction.values()) {
-					Coord pos2 = pos.add(dir);
-					if (cellExist(pos2) && isWater(pos2)) {
+					Coord nextPos = pos.add(dir);
+					if (isWater(nextPos)) {
 						// Note: queue may contains duplicates
-						toFill.add(pos2);
+						toFill.add(nextPos);
 					}
 				}
 			}
@@ -130,7 +129,7 @@ class Solution {
 		for (int posIdx = 0; posIdx < posCount; posIdx++) {
 			Coord pos = new Coord(in);
 			Zone zone = board.getZoneAt(pos);
-			System.out.println(zone.size);
+			System.out.println(zone.cells.size());
 		}
 	}
 
