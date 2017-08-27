@@ -15,10 +15,8 @@ class Solution {
 		int rank = in.nextInt();
 
 		String conwaySeq = Integer.toString(init);
-		//System.err.println(conwaySeq);
 		while (rank > 1) {
 			conwaySeq = next(conwaySeq);
-			//System.err.println(conwaySeq);
 			rank--;
 		}
 

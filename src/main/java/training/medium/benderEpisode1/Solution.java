@@ -59,11 +59,9 @@ class Board {
 	
 	Board(Scanner in) {
 		this(in.nextInt(), in.nextInt());
-		//System.err.println(height + " " + width);
 		in.nextLine(); // Eat \n before reading raw lines
 		for (int rowIdx = 0; rowIdx < height; rowIdx++) {
 			String row = in.nextLine();
-			//System.err.println(row);
 			cells[rowIdx] = new StringBuilder(row);
 		}
 	}

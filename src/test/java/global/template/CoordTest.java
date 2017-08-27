@@ -233,8 +233,8 @@ public class CoordTest {
 
 		Zone zone3 = board.getZoneAt(new Coord(17, 15));
 		Zone zone4 = board.getZoneAt(new Coord(4, 16));
-		assertEquals(35, zone3.cells.size());
-		assertEquals(1, zone4.cells.size());
+		assertEquals(35, zone3.size());
+		assertEquals(1, zone4.size());
 
 		board.setCellAt(pos1, 'A');
 		board.setCellAt(pos2, 'B');

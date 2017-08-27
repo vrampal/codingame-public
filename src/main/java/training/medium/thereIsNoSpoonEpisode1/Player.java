@@ -32,11 +32,8 @@ class Board {
 	
 	Board(Scanner in) {
 		this(in.nextInt(), in.nextInt());
-		//System.err.println(height + " " + width);
 		for (int rowIdx = 0; rowIdx < height; rowIdx++) {
-			String row = in.next();
-			//System.err.println(row);
-			cells[rowIdx] = row;
+			cells[rowIdx] = in.next();
 		}
 	}
 

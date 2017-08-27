@@ -12,9 +12,7 @@ class Coord {
 	}
 
 	Coord(Scanner in) {
-		x = in.nextInt();
-		y = in.nextInt();
-		//System.err.println(toString());
+		this(in.nextInt(), in.nextInt());
 	}
 
 	public String toString() {

@@ -9,7 +9,6 @@ class Task {
 	Task(Scanner in) {
 		start = in.nextInt();
 		int length = in.nextInt();
-		//System.err.println(start + " " + length);
 		end = start + length;
 	}
 

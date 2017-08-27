@@ -33,7 +33,6 @@ class Graph {
 			Node from = findNode(fromId);
 			Node to = findNode(toId);
 			from.createEdge(to);
-			//System.err.println("Edge " + fromId + " -> " + toId);
 		}
 	}
 

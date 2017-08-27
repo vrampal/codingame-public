@@ -5,17 +5,22 @@ import java.lang.management.*;
 class Monitor {
 	private static final MemoryMXBean MEMORY_MX_BEAN = ManagementFactory.getMemoryMXBean();
 
-	private final boolean debugEnable;
-	private long timeMark = System.nanoTime();
+	private final boolean logEnabled;
+	private long lastMark = System.nanoTime();
+
 	int turn = 0;
-	
-	Monitor(boolean print) {
-		this.debugEnable = print;
+
+	Monitor(boolean logEnabled) {
+		this.logEnabled = logEnabled;
+	}
+
+	void start() {
+		lastMark = System.nanoTime();
 	}
 
 	int elapsedMs() {
 		long now = System.nanoTime();
-		int elapsed = (int) ((now - timeMark) / 1000000L);
+		int elapsed = (int) ((now - lastMark) / 1000000L);
 		return elapsed;
 	}
 
@@ -29,8 +34,8 @@ class Monitor {
 
 	void nextTurn() {
 		long now = System.nanoTime();
-		if (debugEnable) {
-			int elapsed = (int) ((now - timeMark) / 1000000L);
+		if (logEnabled) {
+			int elapsed = (int) ((now - lastMark) / 1000000L);
 			MemoryUsage heapUsage = MEMORY_MX_BEAN.getHeapMemoryUsage();
 			long totalMem = heapUsage.getMax();
 			long usedMem = heapUsage.getUsed();
@@ -38,7 +43,8 @@ class Monitor {
 			long usedMemKb = usedMem / 1024;
 			System.err.println("Turn " + turn + " in " + elapsed + "ms, memory " + usedMemKb + "kB (" + usedPercent + "%)");
 		}
-		timeMark = now;
+		lastMark = now;
 		turn++;
 	}
 }
+

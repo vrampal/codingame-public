@@ -34,7 +34,6 @@ class Solution {
 			int amount = in.nextInt();
 			String doorA = in.next();
 			String doorB = in.next();
-			//System.err.println(id + " " + amount + " " + doorA + " " + doorB);
 			Room room = findRoom(id);
 			room.amount = amount;
 			room.doorA = findRoom(doorA);

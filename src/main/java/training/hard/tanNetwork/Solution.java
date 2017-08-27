@@ -89,15 +89,12 @@ class Graph {
 		return stopsById.get(id);
 	}
 
-	Collection<BusStop> shortestPath(BusStop begin, BusStop end) {
+	private Collection<BusStop> path(BusStop begin, BusStop end, Queue<BusStop> toUpdate) {
 		for (BusStop node : stopsById.values()) {
 			node.pathDist = Double.POSITIVE_INFINITY;
 		}
 		begin.pathDist = 0.0;
 
-		//Comparator<BusStop> heuristic = new DistanceFrom(end);
-		//Queue<BusStop> toUpdate = new PriorityQueue<>(heuristic);
-		Queue<BusStop> toUpdate = new ArrayDeque<>();
 		toUpdate.add(begin);
 		while (!toUpdate.isEmpty()) {
 			BusStop node = toUpdate.poll();
@@ -126,6 +123,14 @@ class Graph {
 		return path;
 	}
 
+	Collection<BusStop> pathDijkstra(BusStop begin, BusStop end) {
+		return path(begin, end, new ArrayDeque<>());
+	}
+
+	Collection<BusStop> pathAstar(BusStop begin, BusStop end) {
+		Comparator<BusStop> heuristic = new DistanceFrom(end);
+		return path(begin, end, new PriorityQueue<>(heuristic));
+	}
 }
 
 class Solution {
@@ -143,7 +148,7 @@ class Solution {
 
 		BusStop begin = graph.getBusStop(beginId);
 		BusStop end = graph.getBusStop(endId);
-		Collection<BusStop> path = graph.shortestPath(begin, end);
+		Collection<BusStop> path = graph.pathDijkstra(begin, end);
 		if (path == Graph.NO_PATH) {
 			System.out.println("IMPOSSIBLE");
 		} else {

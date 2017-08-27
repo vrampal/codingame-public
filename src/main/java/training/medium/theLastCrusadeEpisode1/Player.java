@@ -16,9 +16,7 @@ class Coord {
 	}
 
 	Coord(Scanner in) {
-		x = in.nextInt();
-		y = in.nextInt();
-		//System.err.println(toString());
+		this(in.nextInt(), in.nextInt());
 	}
 
 	Coord add(Direction dir) {
@@ -101,7 +99,6 @@ class Board {
 	
 	Board(Scanner in) {
 		this(in.nextInt(), in.nextInt());
-		//System.err.println(height + " " + width);
 		for (int rowIdx = 0; rowIdx < height; rowIdx++) {
 			for (int colIdx = 0; colIdx < width; colIdx++) {
 				int n = in.nextInt();

@@ -16,11 +16,9 @@ class Coord {
 	}
 
 	Coord(Scanner in) {
-		x = in.nextInt();
-		y = in.nextInt();
-		//System.err.println(toString());
+		this(in.nextInt(), in.nextInt());
 	}
-	
+
 	Coord add(Direction dir) {
 		switch (dir) {
 		case N:  return new Coord(x,     y - 1);
@@ -30,7 +28,7 @@ class Coord {
 		default: throw new IllegalArgumentException("Invalid dir: " + dir);
 		}
 	}
-	
+
 	public String toString() {
 		return x + " " + y;
 	}
@@ -48,20 +46,16 @@ class Board {
 	private Board(int width, int height) {
 		this.width = width;
 		this.height = height;
-		//System.err.println(height + " " + width);
 		cells = new StringBuilder[height];
 	}
-	
+
 	Board(Scanner in) {
 		this(in.nextInt(), in.nextInt());
-		//System.err.println(width + " " + height);
-		// Warning: board content is not immediately after size!
 	}
 
 	void readFrom(Scanner in) {
 		for (int rowIdx = 0; rowIdx < height; rowIdx++) {
 			String row = in.next();
-			//System.err.println(row);
 			cells[rowIdx] = new StringBuilder(row);
 		}
 	}
@@ -77,7 +71,7 @@ class Board {
 	void setCellAt(Coord pos, char val) {
 		cells[pos.y].setCharAt(pos.x, val);
 	}
-	
+
 	void floodFill(Coord start) {
 		Queue<Coord> toFill = new ArrayDeque<>();
 		toFill.add(start);
@@ -96,9 +90,9 @@ class Board {
 		}
 	}
 
-	void print() {
-		for (StringBuilder line : cells) {
-			System.err.println(line);
+	void debugPrint() {
+		for (StringBuilder row : cells) {
+			System.err.println(row);
 		}
 	}
 }
@@ -118,7 +112,7 @@ class Solution {
 
 		board.floodFill(entry);
 		//System.err.println("After fill");
-		//board.print();
+		//board.debugPrint();
 
 		List<Coord> exitList = new ArrayList<>();
 		for (int rowIdx = 0; rowIdx < board.height; rowIdx++) {

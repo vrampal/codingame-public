@@ -16,11 +16,9 @@ class Coord {
 	}
 
 	Coord(Scanner in) {
-		x = in.nextInt();
-		y = in.nextInt();
-		//System.err.println(toString());
+		this(in.nextInt(), in.nextInt());
 	}
-	
+
 	Coord add(Direction dir) {
 		switch (dir) {
 		case N:  return new Coord(x,     y - 1);
@@ -37,7 +35,11 @@ class Coord {
 }
 
 class Zone {
-	final Collection<Coord> cells = new HashSet<>();
+	final Set<Coord> coords = new HashSet<>();
+
+	int size() {
+		return coords.size();
+	}
 }
 
 class Board {
@@ -52,7 +54,6 @@ class Board {
 	private Board(int width, int height) {
 		this.width = width;
 		this.height = height;
-		//System.err.println(height + " " + width);
 		cells = new String[height];
 		zones = new Zone[height][];
 		for (int rowIdx = 0; rowIdx < height; rowIdx++) {
@@ -62,11 +63,8 @@ class Board {
 	
 	Board(Scanner in) {
 		this(in.nextInt(), in.nextInt());
-		//System.err.println(width + " " + height);
 		for (int rowIdx = 0; rowIdx < height; rowIdx++) {
-			String row = in.next();
-			//System.err.println(row);
-			cells[rowIdx] = row;
+			cells[rowIdx] = in.next();
 		}
 	}
 
@@ -101,7 +99,7 @@ class Board {
 			Coord pos = toFill.poll();
 			if (zones[pos.y][pos.x] == null) {
 				zones[pos.y][pos.x] = zone;
-				zone.cells.add(pos);
+				zone.coords.add(pos);
 				for (Direction dir : Direction.values()) {
 					Coord nextPos = pos.add(dir);
 					if (isWater(nextPos)) {
@@ -129,7 +127,7 @@ class Solution {
 		for (int posIdx = 0; posIdx < posCount; posIdx++) {
 			Coord pos = new Coord(in);
 			Zone zone = board.getZoneAt(pos);
-			System.out.println(zone.cells.size());
+			System.out.println(zone.size());
 		}
 	}
 

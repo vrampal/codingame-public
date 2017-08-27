@@ -15,10 +15,8 @@ class Board {
 
 	Board(Scanner in) {
 		this(in.nextInt(), in.nextInt());
-		//System.err.println(width + " " + height);
 		for (int rowIdx = 0; rowIdx < height; rowIdx++) {
 			String row = in.next();
-			//System.err.println(line);
 			rows[rowIdx] = new StringBuilder(row);
 		}
 	}

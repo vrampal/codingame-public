@@ -45,7 +45,6 @@ class Bike {
 
 	Bike(Scanner in) {
 		this(in.nextInt(), in.nextInt(), (in.nextInt() == 1));
-		//System.err.println(toString());
 	}
 
 	Bike applyMove(Bridge bridge, int speed) {

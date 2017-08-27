@@ -81,9 +81,7 @@ class Coord {
 	}
 
 	Coord(Scanner in) {
-		x = in.nextInt();
-		y = in.nextInt();
-		//System.err.println(toString());
+		this(in.nextInt(), in.nextInt());
 	}
 
 	Coord add(Direction4 dir) {
@@ -144,6 +142,13 @@ class Coord {
 		return deltaX + deltaY;
 	}
 
+	CubeCoord toCubeCoord() {
+		int newX = x - (y - (y & 1)) / 2;
+		int newZ = y;
+		int newY = -(newX + newZ);
+		return new CubeCoord(newX, newY, newZ);
+	}
+
 	// Hexagonal distance (for 6 direction maps)
 	// http://www.redblobgames.com/grids/hexagons/
 	int distanceHexa(Coord other) {
@@ -165,13 +170,6 @@ class Coord {
 		int deltaY = y - other.y;
 		return sqrt(((double)deltaX * deltaX) + ((double)deltaY * deltaY));
 	}
-
-	CubeCoord toCubeCoord() {
-		int newX = x - (y - (y & 1)) / 2;
-		int newZ = y;
-		int newY = -(newX + newZ);
-		return new CubeCoord(newX, newY, newZ);
-	}		
 
 	public int hashCode() {
 		final int PRIME = 31;
@@ -292,7 +290,11 @@ class Segment {
 }
 
 class Zone {
-	final Collection<Coord> cells = new HashSet<>();
+	final Set<Coord> coords = new HashSet<>();
+
+	int size() {
+		return coords.size();
+	}
 }
 
 class Board {
@@ -313,11 +315,9 @@ class Board {
 
 	Board(Scanner in) {
 		this(in.nextInt(), in.nextInt());
-		//System.err.println(height + " " + width);
 		// TODO split here is content is not right after size
 		for (int rowIdx = 0; rowIdx < height; rowIdx++) {
 			String row = in.next(); // TODO use in.nextLine() if the line contains spaces
-			//System.err.println(row);
 			cells[rowIdx] = new StringBuilder(row);
 		}
 	}
@@ -367,6 +367,14 @@ class Board {
 		return (cellExist(pos) && (getCellAt(pos) != '#')); // TODO modify depending of the game
 	}
 
+	void clearZones() {
+		for (int rowIdx = 0; rowIdx < height; rowIdx++) {
+			for (int colIdx = 0; colIdx < width; colIdx++) {
+				zones[rowIdx][colIdx] = null;
+			}
+		}
+	}
+
 	Zone getZoneAt(Coord pos) {
 		if (!canWalkOn(pos)) {
 			return new Zone();
@@ -386,7 +394,7 @@ class Board {
 			Coord pos = toFill.poll();
 			if (zones[pos.y][pos.x] == null) {
 				zones[pos.y][pos.x] = zone;
-				zone.cells.add(pos);
+				zone.coords.add(pos);
 				for (Direction4 dir : Direction4.values()) { // TODO modify depending of the game
 					Coord nextPos = pos.add(dir);
 					if (canWalkOn(nextPos)) {

@@ -119,7 +119,6 @@ class Solution {
 	void run() {
 		LexiTree lexiTree = new LexiTree();
 		String encoded = in.next();
-		//System.err.println(encoded);
 
 		int wordCnt = in.nextInt();
 		for (int wordIdx = 0; wordIdx < wordCnt; wordIdx++) {
