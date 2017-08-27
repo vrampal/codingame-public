@@ -2,7 +2,6 @@ package training.medium.scrabble;
 
 import static org.junit.Assert.*;
 
-import java.io.*;
 import java.util.*;
 
 import org.junit.*;
