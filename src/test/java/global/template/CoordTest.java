@@ -241,6 +241,16 @@ public class CoordTest {
 
 		assertEquals('A', board.getCellAt(pos1));
 		assertEquals('B', board.getCellAt(pos2));
+
+		Path path = board.pathDijkstra(pos1, pos2);
+		assertEquals(59, path.size());
+
+		path = board.pathDijkstra(pos3, pos1);
+		assertSame(Path.NO_PATH, path);
+
+		path = board.pathDijkstra(pos1, pos1);
+		assertNotSame(Path.NO_PATH, path);
+		assertSame(0, path.size());
 	}
 
 }

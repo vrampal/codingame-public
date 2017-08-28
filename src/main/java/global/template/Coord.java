@@ -297,6 +297,17 @@ class Zone {
 	}
 }
 
+class Path {
+	static final Path NO_PATH = new Path();
+
+	final Deque<Direction4> directions = new ArrayDeque<>();
+	final Deque<Coord> coords = new ArrayDeque<>();
+
+	int size() {
+		return directions.size();
+	}
+}
+
 class Board {
 	final int width;
 	final int height;
@@ -405,6 +416,71 @@ class Board {
 			}
 		}
 		return zone;
+	}
+
+	static class PathData {
+		int pathDist = Integer.MAX_VALUE;
+		Direction4 pathPrev;
+	}
+
+	private static PathData getPathData(Map<Coord, PathData> pathMap, Coord pos) {
+		PathData pathData = pathMap.get(pos);
+		if (pathData == null) {
+			pathData = new PathData();
+			pathMap.put(pos, pathData);
+		}
+		pathMap.put(pos, pathData);
+		return pathData;
+	}
+
+	private Path path(Coord start, Coord end, Queue<Coord> toUpdate) {
+		Map<Coord, PathData> pathMap = new HashMap<>();
+
+		PathData startData = getPathData(pathMap, start);
+		startData.pathDist = 0;
+		PathData endData = getPathData(pathMap, end);
+
+		toUpdate.add(start);
+		while (!toUpdate.isEmpty()) {
+			Coord curPos = toUpdate.poll();
+			PathData pathData = pathMap.get(curPos);
+			for (Direction4 dir : Direction4.values()) { // TODO modify depending of the game
+				Coord nextPos = curPos.add(dir);
+				if (canWalkOn(nextPos)) { // TODO modify depending of the game
+					PathData nextData = getPathData(pathMap, nextPos);
+					int dist = pathData.pathDist + 1;
+					if ((dist < endData.pathDist) && (nextData.pathDist > dist)) {
+						nextData.pathDist = dist;
+						nextData.pathPrev = dir;
+						toUpdate.add(nextPos); // queue may contains duplicates
+					}
+				}
+			}
+		}
+
+		if (endData.pathDist == Integer.MAX_VALUE) {
+			return Path.NO_PATH;
+		}
+
+		Path path = new Path();
+		Coord pos = end;
+		while (!pos.equals(start)) {
+			PathData pathData = pathMap.get(pos);
+			Direction4 dir = pathData.pathPrev;
+			path.directions.addFirst(dir);
+			path.coords.addFirst(pos);
+			pos = pos.add(dir.oposite());
+		}
+		path.coords.addFirst(pos);
+		return path;
+	}
+
+	Path pathDijkstra(Coord begin, Coord end) {
+		return path(begin, end, new ArrayDeque<>());
+	}
+
+	Path pathAstar(Coord begin, Coord end, Comparator<Coord> heuristic) {
+		return path(begin, end, new PriorityQueue<>(heuristic));
 	}
 
 	void debugPrint() {
