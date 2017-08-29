@@ -171,6 +171,18 @@ class Coord {
 		return sqrt(((double)deltaX * deltaX) + ((double)deltaY * deltaY));
 	}
 
+	Coord moveTo(Coord target, double maxDist) {
+		Coord newPos = target;
+		double dist = distanceEcl(target);
+		if (dist > maxDist) {
+			double ratio = maxDist / dist;
+			int newX = x + (int) rint((target.x - x) * ratio);
+			int newY = y + (int) rint((target.y - y) * ratio);
+			newPos = new Coord(newX, newY);
+		}
+		return newPos;
+	}
+
 	public int hashCode() {
 		final int PRIME = 31;
 		int result = 1;
