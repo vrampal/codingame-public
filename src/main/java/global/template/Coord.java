@@ -320,6 +320,18 @@ class Path {
 	}
 }
 
+class DistanceFrom implements Comparator<Coord> {
+	final Coord target;
+	
+	DistanceFrom(Coord target) {
+		this.target = target;
+	}
+
+	public int compare(Coord o1, Coord o2) {
+		return Integer.compare(target.distanceMan(o1), target.distanceMan(o2)); // TODO modify depending of the game
+	}
+}
+
 class Board {
 	final int width;
 	final int height;
