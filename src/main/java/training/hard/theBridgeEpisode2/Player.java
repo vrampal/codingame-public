@@ -133,15 +133,15 @@ class State {
 		
 	}
 
-	boolean isValid() {
-		return (countAlive >= minAlive);
+	boolean isDefeat() {
+		return (countAlive < minAlive);
 	}
 
 	boolean isVictory() {
 		return (x > bridge.width);
 	}
 
-	boolean canApply(Action action) {
+	boolean canPlay(Action action) {
 		switch (action) {
 		case JUMP:
 		case WAIT: return (speed > 0);
@@ -149,10 +149,10 @@ class State {
 		case UP:   return (minY > 0);
 		case DOWN: return (maxY < 3);
 		default: return true;
-		}		
+		}
 	}
 
-	State apply(Action action) {
+	State simulate(Action action) {
 		List<Action> newActions = new ArrayList<>(actions.size() + 1);
 		newActions.addAll(actions);
 		newActions.add(action);
@@ -226,9 +226,9 @@ class Player {
 			State target = queue.poll();
 			while (!target.isVictory()) {
 				for (Action action : Action.values()) {
-					if (target.canApply(action)) {
-						State future  = target.apply(action);
-						if (future.isValid()) {
+					if (target.canPlay(action)) {
+						State future  = target.simulate(action);
+						if (!future.isDefeat()) {
 							queue.add(future);
 						}
 					}
