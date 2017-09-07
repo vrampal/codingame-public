@@ -5,10 +5,16 @@ import static java.lang.Math.*;
 import java.util.*;
 
 enum Direction4 {
-	N, E, S, W; // TODO control name and order
-	//NORTH, EAST, SOUTH, WEST;
-	//UP, RIGHT, DOWN, LEFT;
-	//TOP, RIGHT, BOTTOM, LEFT;
+	N(new Coord( 0, -1)),
+	E(new Coord(+1,  0)),
+	S(new Coord( 0, +1)),
+	W(new Coord(-1,  0));
+
+	final Coord coord;
+
+	private Direction4(Coord coord) {
+		this.coord = coord;
+	}
 
 	Direction4 cw() {
 		return values()[(ordinal() + 1) % 4];
@@ -24,7 +30,18 @@ enum Direction4 {
 }
 
 enum Direction6 {
-	NE, E, SE, SW, W, NW; // TODO control name and order
+	NE(new CubeCoord(+1,  0, -1)),
+	E( new CubeCoord(+1, -1,  0)),
+	SE(new CubeCoord( 0, -1, +1)),
+	SW(new CubeCoord(-1,  0, +1)),
+	W( new CubeCoord(-1, +1,  0)),
+	NW(new CubeCoord( 0, +1, -1));
+
+	final CubeCoord cubeCoord;
+
+	private Direction6(CubeCoord cube) {
+		this.cubeCoord = cube;
+	}
 
 	Direction6 cw() {
 		return values()[(ordinal() + 1) % 6];
@@ -48,7 +65,20 @@ enum Direction6 {
 }
 
 enum Direction8 {
-	N, NE, E, SE, S, SW, W, NW; // TODO control name and order
+	N( new Coord( 0, -1)),
+	NE(new Coord(+1, -1)),
+	E( new Coord(+1,  0)),
+	SE(new Coord(+1, +1)),
+	S( new Coord( 0, +1)),
+	SW(new Coord(-1, +1)),
+	W( new Coord(-1,  0)),
+	NW(new Coord(-1, -1));
+
+	final Coord coord;
+
+	private Direction8(Coord coord) {
+		this.coord = coord;
+	}
 
 	Direction8 cw() {
 		return values()[(ordinal() + 1) % 8];
@@ -84,54 +114,12 @@ class Coord {
 		this(in.nextInt(), in.nextInt());
 	}
 
+	Coord add(Coord other) {
+		return new Coord(x + other.x, y + other.y);
+	}
+
 	Coord add(Direction4 dir) {
-		switch (dir) {
-		case N:  return new Coord(x,     y - 1);
-		case E:  return new Coord(x + 1, y);
-		case S:  return new Coord(x,     y + 1);
-		case W:  return new Coord(x - 1, y);
-		default: throw new IllegalArgumentException("Invalid dir: " + dir);
-		}
-	}
-
-	Coord add(Direction6 dir) {
-		if ((y % 2) == 0) {
-			// Even lines
-			switch (dir) {
-			case NE: return new Coord(x,     y - 1);
-			case E:  return new Coord(x + 1, y);
-			case SE: return new Coord(x,     y + 1);
-			case SW: return new Coord(x - 1, y + 1);
-			case W:  return new Coord(x - 1, y);
-			case NW: return new Coord(x - 1, y - 1);
-			default: throw new IllegalArgumentException("Invalid dir: " + dir);
-			}
-		} else {
-			// Odd lines
-			switch (dir) {
-			case NE: return new Coord(x + 1, y - 1);
-			case E:  return new Coord(x + 1, y);
-			case SE: return new Coord(x + 1, y + 1);
-			case SW: return new Coord(x,     y + 1);
-			case W:  return new Coord(x - 1, y);
-			case NW: return new Coord(x,     y - 1);
-			default: throw new IllegalArgumentException("Invalid dir: " + dir);
-			}
-		}
-	}
-
-	Coord add(Direction8 dir) {
-		switch (dir) {
-		case N:  return new Coord(x,     y - 1);
-		case NE: return new Coord(x + 1, y - 1);
-		case E:  return new Coord(x + 1, y);
-		case SE: return new Coord(x + 1, y + 1);
-		case S:  return new Coord(x,     y + 1);
-		case SW: return new Coord(x - 1, y + 1);
-		case W:  return new Coord(x - 1, y);
-		case NW: return new Coord(x - 1, y - 1);
-		default: throw new IllegalArgumentException("Invalid dir: " + dir);
-		}
+		return add(dir.coord);
 	}
 
 	// Manhattan distance (for 4 directions maps)
@@ -149,10 +137,20 @@ class Coord {
 		return new CubeCoord(newX, newY, newZ);
 	}
 
+	Coord add(Direction6 dir) {
+		// Note: for hexa grid prefer using CubeCoord
+		return toCubeCoord().add(dir).toCoord();
+	}
+
 	// Hexagonal distance (for 6 direction maps)
 	// http://www.redblobgames.com/grids/hexagons/
 	int distanceHexa(Coord other) {
+		// Note: for hexa grid prefer using CubeCoord
 		return toCubeCoord().distanceHexa(other.toCubeCoord());
+	}
+
+	Coord add(Direction8 dir) {
+		return add(dir.coord);
 	}
 
 	// Chebyshev distance (for 8 directions maps)
@@ -210,28 +208,24 @@ class CubeCoord {
 	final int y;
 	final int z;
 
-	public CubeCoord(int x, int y, int z) {
+	CubeCoord(int x, int y, int z) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
 	}
 
-	Coord toOffsetCoord() {
+	Coord toCoord() {
 		int newX = x + (z - (z & 1)) / 2;
 		int newY = z;
 		return new Coord(newX, newY);
 	}
 
+	CubeCoord add(CubeCoord other) {
+		return new CubeCoord(x + other.x, y + other.y, z + other.z);
+	}
+
 	CubeCoord add(Direction6 dir) {
-		switch (dir) {
-		case NE: return new CubeCoord(x + 1, y,     z - 1);
-		case E:  return new CubeCoord(x + 1, y - 1, z);
-		case SE: return new CubeCoord(x,     y - 1, z + 1);
-		case SW: return new CubeCoord(x - 1, y,     z + 1);
-		case W:  return new CubeCoord(x - 1, y + 1, z);
-		case NW: return new CubeCoord(x,     y + 1, z - 1);
-		default: throw new IllegalArgumentException("Invalid dir: " + dir);
-		}
+		return add(dir.cubeCoord);
 	}
 
 	int distanceHexa(CubeCoord other) {
@@ -256,10 +250,6 @@ class CubeCoord {
 		if (getClass() != obj.getClass()) return false;
 		CubeCoord other = (CubeCoord) obj;
 		return (x == other.x) && (y == other.y) && (z == other.z);
-	}
-
-	public String toString() {
-		return "[" + x + ",  " + y +  ",  " + z + "]";
 	}
 }
 
@@ -322,7 +312,7 @@ class Path {
 
 class DistanceFrom implements Comparator<Coord> {
 	final Coord target;
-	
+
 	DistanceFrom(Coord target) {
 		this.target = target;
 	}

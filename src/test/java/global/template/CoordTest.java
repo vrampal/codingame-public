@@ -76,8 +76,8 @@ public class CoordTest {
 		assertEquals(pos1Cube, pos1.toCubeCoord());
 		assertEquals(pos2Cube, pos2.toCubeCoord());
 
-		assertEquals(pos1, pos1Cube.toOffsetCoord());
-		assertEquals(pos2, pos2Cube.toOffsetCoord());
+		assertEquals(pos1, pos1Cube.toCoord());
+		assertEquals(pos2, pos2Cube.toCoord());
 
 		// Distances
 		assertEquals(13, pos1.distanceMan(pos2));
