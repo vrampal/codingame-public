@@ -35,11 +35,7 @@ class Coord {
 }
 
 class Zone {
-	final Set<Coord> coords = new HashSet<>();
-
-	int size() {
-		return coords.size();
-	}
+	int size = 0;
 }
 
 class Board {
@@ -99,7 +95,7 @@ class Board {
 			Coord pos = toFill.poll();
 			if (zones[pos.y][pos.x] == null) {
 				zones[pos.y][pos.x] = zone;
-				zone.coords.add(pos);
+				zone.size++;
 				for (Direction dir : Direction.values()) {
 					Coord nextPos = pos.add(dir);
 					if (isWater(nextPos)) {
@@ -127,7 +123,7 @@ class Solution {
 		for (int posIdx = 0; posIdx < posCount; posIdx++) {
 			Coord pos = new Coord(in);
 			Zone zone = board.getZoneAt(pos);
-			System.out.println(zone.size());
+			System.out.println(zone.size);
 		}
 	}
 
