@@ -25,7 +25,7 @@ class Board:
     __width: int
     __height: int
     __cells: list
-    __zone: list
+    __zones: list
 
     def __init__(self):
         self.__width = int(input())
