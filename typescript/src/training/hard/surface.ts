@@ -23,56 +23,55 @@ class Zone {
 }
 
 class Board {
-    width: number;
-    height: number;
-    cells: string[] = [];
-    zones: Zone[][] = [];
+    private _width: number;
+    private _height: number;
+    private _cells: string[] = [];
+    private _zones: Zone[][] = [];
 
     constructor() {
-        this.width = parseInt(readline());
-        this.height = parseInt(readline());
-        for (let rowIdx = 0; rowIdx < this.height; rowIdx++) {
-            this.cells[rowIdx] = readline();
-            this.zones[rowIdx] = [];
+        this._width = parseInt(readline());
+        this._height = parseInt(readline());
+        for (let rowIdx = 0; rowIdx < this._height; rowIdx++) {
+            this._cells[rowIdx] = readline();
+            this._zones[rowIdx] = [];
         }
     }
 
-    cellExist(pos: Coord): boolean {
-        return ((pos.x >= 0) && (pos.x < this.width) && (pos.y >=  0) && (pos.y < this.height));
+    private _cellExist(pos: Coord): boolean {
+        return ((pos.x >= 0) && (pos.x < this._width) && (pos.y >=  0) && (pos.y < this._height));
     }
 
-    getCell(pos: Coord): string {
-        return this.cells[pos.y].charAt(pos.x);
+    private _getCell(pos: Coord): string {
+        return this._cells[pos.y].charAt(pos.x);
     }
 
-    isWater(pos: Coord): boolean {
-        return (this.cellExist(pos) && this.getCell(pos) == 'O');
+    private _isWater(pos: Coord): boolean {
+        return (this._cellExist(pos) && this._getCell(pos) == 'O');
     }
 
     getZoneAt(pos: Coord): Zone {
-        if (!this.isWater(pos)) {
+        if (!this._isWater(pos)) {
             return new Zone();
         }
-        const candidate: Zone = this.zones[pos.y][pos.x];
+        const candidate: Zone = this._zones[pos.y][pos.x];
         if (candidate != null) {
             return candidate;
         }
-        return this.floodFill(pos);
+        return this._floodFill(pos);
     }
 
-    floodFill(pos: Coord): Zone {
+    private _floodFill(pos: Coord): Zone {
         const zone: Zone = new Zone();
         const toFill: Coord[] = [pos];
         while (toFill.length > 0) {
             const pos: Coord = toFill.pop();
-            if (this.zones[pos.y][pos.x] == null) {
-                this.zones[pos.y][pos.x] = zone;
+            if (this._zones[pos.y][pos.x] == null) {
+                this._zones[pos.y][pos.x] = zone;
                 zone.size += 1
                 const adj: Coord[] = pos.adjacent();
                 for (let i = 0; i < adj.length; i++) {
                     const nextPos: Coord = adj[i];
-                    if (this.isWater(nextPos)) {
-                        // Note: queue may contains duplicates
+                    if (this._isWater(nextPos)) {
                         toFill.push(nextPos);
                     }
                 }
