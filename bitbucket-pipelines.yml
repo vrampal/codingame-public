@@ -6,4 +6,4 @@ pipelines:
         caches:
           - maven
         script:
-          - mvn -B -V clean verify
+          - cd java && mvn -B -V clean verify
