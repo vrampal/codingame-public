@@ -55,8 +55,7 @@ class Board:
 
     def __flood_fill(self, start: Coord) -> Zone:
         zone: Zone = Zone()
-        to_fill = list()
-        to_fill.append(start)
+        to_fill = [start]
         while to_fill:
             pos: Coord = to_fill.pop()
             if self.__zones[pos.y][pos.x] is None:
@@ -64,6 +63,7 @@ class Board:
                 zone.size += 1
                 for next_pos in pos.adjacent():
                     if self.__is_water(next_pos):
+						// Note: queue may contains duplicates
                         to_fill.append(next_pos)
         return zone
 

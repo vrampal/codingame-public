@@ -1,10 +1,4 @@
-package training.hard.surface;
-
 import java.util.*;
-
-enum Direction {
-	N, E, S, W;
-}
 
 class Coord {
 	final int x;
@@ -19,18 +13,9 @@ class Coord {
 		this(in.nextInt(), in.nextInt());
 	}
 
-	Coord add(Direction dir) {
-		switch (dir) {
-		case N:  return new Coord(x,     y - 1);
-		case E:  return new Coord(x + 1, y);
-		case S:  return new Coord(x,     y + 1);
-		case W:  return new Coord(x - 1, y);
-		default: throw new IllegalArgumentException("Invalid dir: " + dir);
-		}
-	}
-	
-	public String toString() {
-		return x + " " + y;
+	Coord[] adjacent() {
+		return new Coord[] { new Coord(x, y - 1), new Coord(x + 1, y),
+			new Coord(x,  y + 1), new Coord(x - 1, y)};
 	}
 }
 
@@ -64,15 +49,15 @@ class Board {
 		}
 	}
 
-	boolean cellExist(Coord pos) {
-		return ((pos.y >= 0) && (pos.y < height) && (pos.x >= 0) && (pos.x < width));
+	private boolean cellExist(Coord pos) {
+		return ((pos.x >= 0) && (pos.x < width) && (pos.y >= 0) && (pos.y < height));
 	}
 
 	private char getCellAt(Coord pos) {
 		return cells[pos.y].charAt(pos.x);
 	}
 	
-	boolean isWater(Coord pos) {
+	private boolean isWater(Coord pos) {
 		return (cellExist(pos) && (getCellAt(pos) == WATER));
 	}
 	
@@ -80,9 +65,9 @@ class Board {
 		if (!isWater(pos)) {
 			return new Zone();
 		}
-		Zone zone = zones[pos.y][pos.x];
-		if (zone != null) {
-			return zone;
+		Zone candidate = zones[pos.y][pos.x];
+		if (candidate != null) {
+			return candidate;
 		}
 		return floodFill(pos);
 	}
@@ -95,9 +80,8 @@ class Board {
 			Coord pos = toFill.poll();
 			if (zones[pos.y][pos.x] == null) {
 				zones[pos.y][pos.x] = zone;
-				zone.size++;
-				for (Direction dir : Direction.values()) {
-					Coord nextPos = pos.add(dir);
+				zone.size += 1;
+				for (Coord nextPos : pos.adjacent()) {
 					if (isWater(nextPos)) {
 						// Note: queue may contains duplicates
 						toFill.add(nextPos);
