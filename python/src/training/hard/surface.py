@@ -68,7 +68,7 @@ class Board:
         return zone
 
 
-def main():
+def main() -> None:
     board = Board()
     pos_count = int(input())
     for posIdx in range(pos_count):
