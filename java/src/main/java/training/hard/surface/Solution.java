@@ -1,3 +1,5 @@
+package training.hard.surface;
+
 import java.util.*;
 
 class Coord {
