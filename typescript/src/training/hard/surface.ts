@@ -72,7 +72,7 @@ class Board {
                 for (let i = 0; i < adj.length; i++) {
                     const nextPos: Coord = adj[i];
                     if (this.isWater(nextPos)) {
-						// Note: queue may contains duplicates
+                        // Note: queue may contains duplicates
                         toFill.push(nextPos);
                     }
                 }
