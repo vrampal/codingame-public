@@ -32,7 +32,7 @@ class Board:
         self.__height = int(input())
         self.__cells = list()
         self.__zones = list()
-        for rowIdx in range(self.__height):
+        for _ in range(self.__height):
             self.__cells.append(input())
             self.__zones.append([None for _ in range(self.__width)])
 
@@ -71,7 +71,7 @@ class Board:
 def main() -> None:
     board = Board()
     pos_count = int(input())
-    for posIdx in range(pos_count):
+    for _ in range(pos_count):
         x, y = [int(val) for val in input().split()]
         pos = Coord(x, y)
         zone = board.get_zone(pos)
