@@ -10,4 +10,4 @@ variables:
 build:
   stage: build
   script:
-    - mvn -B -V clean verify
+    - cd java && mvn -B -V clean verify
