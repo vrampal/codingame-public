@@ -30,8 +30,8 @@ class Board:
     def __init__(self):
         self.__width = int(input())
         self.__height = int(input())
-        self.__cells = list()
-        self.__zones = list()
+        self.__cells = []
+        self.__zones = []
         for _ in range(self.__height):
             self.__cells.append(input())
             self.__zones.append([None for _ in range(self.__width)])
