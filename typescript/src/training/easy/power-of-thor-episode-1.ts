@@ -7,7 +7,7 @@ let thorY: number = parseInt(inputs[3]); // Thor's starting Y position
 while (true) {
     const remainingTurns: number = parseInt(readline()); // The remaining amount of turns Thor can move. Do not remove this line.
 
-    let direction: string = "";
+    let direction = "";
     if (lightY > thorY) {
         direction = "S";
 		thorY += 1;

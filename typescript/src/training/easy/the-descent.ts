@@ -1,5 +1,5 @@
 while (true) {
-    let maxHeightIndex: number = 0;
+    let maxHeightIndex = 0;
     let maxHeight: number = parseInt(readline());
 
     for (let index = 1; index < 8; index++) {

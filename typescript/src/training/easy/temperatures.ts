@@ -1,6 +1,6 @@
 const temperCount: number = parseInt(readline()); // the number of temperatures to analyse
-let bestTemper: number = 0;
-let smallestNorm: number = 999999;
+let bestTemper = 0;
+let smallestNorm = 999999;
 
 const inputs: string[] = readline().split(' ');
 for (let index = 0; index < temperCount; index++) {
