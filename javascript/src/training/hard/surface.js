@@ -1,75 +1,67 @@
 class Coord {
-  x: number;
-  y: number;
-
-  constructor(x: number, y: number) {
+  constructor(x, y) {
     this.x = x;
     this.y = y;
   }
 
-  adjacent(): Coord[] {
+  adjacent() {
     return [new Coord(this.x, this.y - 1), new Coord(this.x + 1, this.y),
       new Coord(this.x, this.y + 1), new Coord(this.x - 1, this.y)];
   }
 }
 
 class Zone {
-  size: number;
-
   constructor() {
     this.size = 0;
   }
 }
 
 class Board {
-  private _width: number;
-  private _height: number;
-  private _cells: string[] = [];
-  private _zones: Zone[][] = [];
-
   constructor() {
     this._width = parseInt(readline());
     this._height = parseInt(readline());
+    this._cells = []
+    this._zones = []
     for (let rowIdx = 0; rowIdx < this._height; rowIdx++) {
       this._cells[rowIdx] = readline();
       this._zones[rowIdx] = [];
     }
   }
 
-  private _cellExist(pos: Coord): boolean {
+  _cellExist(pos) {
     return pos.x >= 0 && pos.x < this._width && pos.y >= 0 && pos.y < this._height;
   }
 
-  private _getCell(pos: Coord): string {
+  _getCell(pos) {
     return this._cells[pos.y].charAt(pos.x);
   }
 
-  private _isWater(pos: Coord): boolean {
+  _isWater(pos) {
     return this._cellExist(pos) && this._getCell(pos) == "O";
   }
 
-  getZoneAt(pos: Coord): Zone {
+  getZoneAt(pos) {
     if (!this._isWater(pos)) {
       return new Zone();
     }
-    const candidate: Zone = this._zones[pos.y][pos.x];
+    const candidate = this._zones[pos.y][pos.x];
     if (candidate != null) {
       return candidate;
     }
     return this._floodFill(pos);
   }
 
-  private _floodFill(start: Coord): Zone {
-    const zone: Zone = new Zone();
-    const toFill: Coord[] = [start];
+  _floodFill(start) {
+    const zone = new Zone();
+    const toFill = [start];
     while (toFill.length > 0) {
-      const pos: Coord = toFill.pop();
+      const pos = toFill.pop();
       if (this._zones[pos.y][pos.x] == null) {
         this._zones[pos.y][pos.x] = zone;
         zone.size += 1;
-        const adj: Coord[] = pos.adjacent();
+        const adj = pos.adjacent();
         for (let i = 0; i < adj.length; i++) {
-          const nextPos: Coord = adj[i];
+          const nextPos = adj[i];
           if (this._isWater(nextPos)) {
             toFill.push(nextPos);
           }
@@ -80,11 +72,11 @@ class Board {
   }
 }
 
-const board: Board = new Board();
-const posCount: number = parseInt(readline());
+const board = new Board();
+const posCount = parseInt(readline());
 for (let i = 0; i < posCount; i++) {
-  const inputs: string[] = readline().split(" ");
-  const pos: Coord = new Coord(parseInt(inputs[0]), parseInt(inputs[1]));
-  const zone: Zone = board.getZoneAt(pos);
+  const inputs = readline().split(" ");
+  const pos = new Coord(parseInt(inputs[0]), parseInt(inputs[1]));
+  const zone = board.getZoneAt(pos);
   console.log(zone.size);
 }

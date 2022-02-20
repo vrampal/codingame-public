@@ -63,7 +63,7 @@ class Board:
                 zone.size += 1
                 for next_pos in pos.adjacent():
                     if self.__is_water(next_pos):
-						// Note: queue may contains duplicates
+                        # Note: queue may contains duplicates
                         to_fill.append(next_pos)
         return zone
 

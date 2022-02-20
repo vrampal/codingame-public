@@ -3,7 +3,7 @@
 from setuptools import setup
 
 setup(
-    name='vrampal-codingame-public',
+    name='vrampal-codingame-private',
     version='0.0.1',
     author="Vincent RAMPAL",
     author_email="vincent.rampal@gmail.com",

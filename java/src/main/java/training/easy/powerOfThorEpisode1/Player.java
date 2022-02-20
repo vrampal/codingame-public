@@ -17,18 +17,18 @@ class Player {
 			String direction = "";
 			if (lightY > thorY) {
 				direction = "S";
-				thorY++;
+				thorY += 1;
 			} else if (lightY < thorY) {
 				direction = "N";
-				thorY--;
+				thorY -= 1;
 			}
 
 			if (lightX > thorX) {
 				direction += "E";
-				thorX++;
+				thorX += 1;
 			} else if (lightX < thorX) {
 				direction += "W";
-				thorX--;
+				thorX -= 1;
 			}
 
 			// A single line providing the move to be made: N NE E SE S SW W or NW

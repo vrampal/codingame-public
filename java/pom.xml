@@ -4,29 +4,8 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>vrampal</groupId>
-  <artifactId>codingame-public</artifactId>
+  <artifactId>codingame-private</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-
-  <licenses>
-    <license>
-      <name>The MIT License (MIT)</name>
-      <url>http://opensource.org/licenses/MIT</url>
-      <distribution>repo</distribution>
-    </license>
-  </licenses>
-
-  <developers>
-    <developer>
-      <id>vrampal</id>
-      <name>Vincent RAMPAL</name>
-      <email>vincent.rampal@gmail.com</email>
-      <roles>
-        <role>architect</role>
-        <role>developer</role>
-      </roles>
-      <timezone>Europe/Paris</timezone>
-    </developer>
-  </developers>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -103,6 +82,7 @@
           </execution>
         </executions>
       </plugin>
+
     </plugins>
   </build>
 
