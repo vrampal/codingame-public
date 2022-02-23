@@ -24,15 +24,16 @@
 # Python binary
 *.pyc
 
-# Node.js
-node_modules/
-
 # Maven build directory
 target/
 
 # Gradle build
 build/
 .gradle
+
+# NPM
+node_modules/
+package-lock.json
 
 # Sonar scanner
 .scannerwork/
