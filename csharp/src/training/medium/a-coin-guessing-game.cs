@@ -1,7 +1,5 @@
 using System;
 using System.Linq;
-using System.IO;
-using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -9,33 +7,13 @@ using System.Collections.Generic;
 // The implementation has a significant memory footprint,
 // but it should be easy to understand if you know object-oriented design.
 
-class Coin {
-    public int oddSide;
-    public int evenSide;
-
-    public Coin(int oddSide, int evenSide) {
-        this.oddSide = oddSide;
-        this.evenSide = evenSide;
-    }
-
-    public override bool Equals(object obj) {
-        return obj is Coin coin &&
-               oddSide == coin.oddSide &&
-               evenSide == coin.evenSide;
-    }
-
-    public override int GetHashCode() {
-        return 1021 * oddSide + evenSide;
-    }
-}
-
 class Association {
 	int maxNum;
 	public ICollection<int> allOddNum = new List<int>();
 	public ICollection<int> allEvenNum = new List<int>();
 
 	// Tracks what associations are possible for any integer
-	IDictionary<int, ISet<Coin>> possible = new Dictionary<int, ISet<Coin>>();
+	IDictionary<int, ICollection<int>> possible = new Dictionary<int, ICollection<int>>();
 	
 	public Association(int coinCount) {
 		this.maxNum = 2 * coinCount;
@@ -47,66 +25,39 @@ class Association {
 		}
 
 		for (int num = 1; num <= maxNum; num++) {
-			possible.Add(num, new HashSet<Coin>());
+			possible[num] = new HashSet<int>();
 		}
 		
 		// Set all associations as possible
 		foreach (int odd in allOddNum) {
 			foreach (int even in allEvenNum) {
-				Add(new Coin(odd, even));
+				possible[odd].Add(even);
+				possible[even].Add(odd);
 			}
 		}
 	}
 	
-	void Add(Coin coin) {
-		possible[coin.oddSide].Add(coin);
-		possible[coin.evenSide].Add(coin);
+	public int OtherSide(int side1) {
+		return possible[side1].First();
 	}
 	
-	public void Remove(Coin coin) {
-		possible[coin.oddSide].Remove(coin);
-		possible[coin.evenSide].Remove(coin);
-	}
-	
-	bool IsKnown(int number) {
-		return (possible[number].Count() == 1);
-	}
-	
-	public Coin GetKnown(int number) {
-		return possible[number].First();
-	}
-	
-	// Remove impossible associations when a coin is known
-	void LockCoin(Coin knownCoin) {
-		foreach (int odd in allOddNum) {
-			if (odd != knownCoin.oddSide) {
-				Coin coin = new Coin(odd, knownCoin.evenSide);
-				Remove(coin);
-			}
-		}
-		foreach (int even in allEvenNum) {
-			if (even != knownCoin.evenSide) {
-				Coin coin = new Coin(knownCoin.oddSide, even);
-				Remove(coin);
-			}
+	public void Remove(int side1, int side2) {
+		ICollection<int> possibleSide2 = possible[side1];
+		bool modified = possibleSide2.Remove(side2);
+		if (modified && (possibleSide2.Count() == 1)) {
+			Cascade(side1);
 		}
 	}
 	
-	public void Resolve() {
-		bool allKnown = false;
-		while (!allKnown) {
-			allKnown = true;
-			for (int index = 1; index <= maxNum; index++) {
-				if (IsKnown(index)) {
-					Coin coin = GetKnown(index);
-					LockCoin(coin);
-				} else {
-					allKnown = false;
-				}
+	void Cascade(int side1) {
+		int side2 = OtherSide(side1);
+		possible[side2] = new List<int> {side1};
+		for (int other_side1 = 1; other_side1 <= maxNum; other_side1++) {
+			if (other_side1 != side1) {
+				Remove(other_side1, side2);
 			}
 		}
 	}
-
 }
 
 class Solution {
@@ -115,36 +66,27 @@ class Solution {
         string[] inputs = Console.ReadLine().Split(' ');
         int coinCount = int.Parse(inputs[0]);
 
-		Association assos = new Association(coinCount);
+		Association association = new Association(coinCount);
 		
         int tossCount = int.Parse(inputs[1]);
         for (int tossIndex = 0; tossIndex < tossCount; tossIndex++) {
-			ICollection<int> visibleOdd = new HashSet<int>();
-			ICollection<int> visibleEven = new HashSet<int>();
+			ICollection<int> values = new HashSet<int>();
             inputs = Console.ReadLine().Split(' ');
             for (int cointIndex = 0; cointIndex < coinCount; cointIndex++) {
-                int value = int.Parse(inputs[cointIndex]);
-				if ((value % 2) == 0) {
-					visibleEven.Add(value);
-				} else {
-					visibleOdd.Add(value);
+				values.Add(int.Parse(inputs[cointIndex]));
+			}
+			// Eliminate impossible associations
+			foreach (int odd in values) {
+				foreach (int even in values) {
+					association.Remove(odd, even);
 				}
-                // Eliminate impossible associations
-                foreach (int odd in visibleOdd) {
-                    foreach (int even in visibleEven) {
-                        Coin coin = new Coin(odd, even);
-                        assos.Remove(coin);
-                    }
-                }
             }
         }
 
-        assos.Resolve();
-
 		IList<String> solutions = new List<String>();
-		foreach (int odd in assos.allOddNum) {
-			Coin coin = assos.GetKnown(odd);
-			solutions.Add(Convert.ToString(coin.evenSide));
+		foreach (int odd in association.allOddNum) {
+			int even = association.OtherSide(odd);
+			solutions.Add(Convert.ToString(even));
 		}
         Console.WriteLine(String.Join(" ", solutions));
     }
