@@ -23,6 +23,7 @@
 
 # Python binary
 *.pyc
+.pytest_cache/
 
 # Maven build directory
 target/

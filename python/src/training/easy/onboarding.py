@@ -1,4 +1,4 @@
-import sys
+from sys import stderr
 
 
 def main():

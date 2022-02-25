@@ -1,4 +1,4 @@
-import sys
+from sys import stderr
 
 
 class Coord:
@@ -24,7 +24,7 @@ class Zone:
 class Board:
     __width: int
     __height: int
-    __cells: list
+    __cells: list[str]
     __zones: list
 
     def __init__(self):

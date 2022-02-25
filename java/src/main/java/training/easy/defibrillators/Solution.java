@@ -35,10 +35,10 @@ class Solution {
 	void run() {
 		GeoCoord userCoord = new GeoCoord(in.next(), in.next());
 
-		int defibCount = in.nextInt();
-		in.nextLine(); // Eat \n before reading raw lines
 		String closestName = null;
 		double closestDist = Double.POSITIVE_INFINITY;
+		int defibCount = in.nextInt();
+		in.nextLine(); // Eat \n before reading raw lines
 		for (int defixIdx = 0; defixIdx < defibCount; defixIdx++) {
 			String defibLine = in.nextLine();
 			String[] defibData = defibLine.split(";");
