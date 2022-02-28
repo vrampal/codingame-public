@@ -1,10 +1,13 @@
+from typing import Dict, List, Set
 # Hello reader, this is my submission for the Feb 2022 event.
 # The implementation has a significant memory footprint,
 # but it should be easy to understand if you know object-oriented design.
+
+
 class Association:
-    all_odd_num = []
-    all_even_num = []
-    __possible = {}  # Tracks what associations are possible for any integer
+    all_odd_num: List[int] = []
+    all_even_num: List[int] = []
+    __possible: Dict[int, Set[int]] = {}  # Tracks what associations are possible for any integer
 
     def __init__(self, coin_count: int):
         # Generate all odd and even number once and for all
@@ -32,7 +35,7 @@ class Association:
 
     def __cascade(self, side1: int) -> None:
         side2: int = self.other_side(side1)
-        self.__possible[side2] = [side1]
+        self.__possible[side2] = {side1}
         for other_side1 in self.__possible:
             if other_side1 != side1:
                 self.remove(other_side1, side2)

@@ -1,4 +1,4 @@
-from sys import stderr
+from typing import List, Optional
 
 
 class Coord:
@@ -24,14 +24,12 @@ class Zone:
 class Board:
     __width: int
     __height: int
-    __cells: list[str]
-    __zones: list
+    __cells: List[str] = []
+    __zones: List[List[Optional[Zone]]] = []
 
     def __init__(self):
         self.__width = int(input())
         self.__height = int(input())
-        self.__cells = []
-        self.__zones = []
         for _ in range(self.__height):
             self.__cells.append(input())
             self.__zones.append([None for _ in range(self.__width)])
@@ -48,7 +46,7 @@ class Board:
     def get_zone(self, pos: Coord) -> Zone:
         if not self.__is_water(pos):
             return Zone()
-        candidate: Zone = self.__zones[pos.y][pos.x]
+        candidate: Optional[Zone] = self.__zones[pos.y][pos.x]
         if candidate:
             return candidate
         return self.__flood_fill(pos)
