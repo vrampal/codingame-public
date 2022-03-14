@@ -4,19 +4,35 @@ updates:
   - package-ecosystem: "maven"
     directory: "/java"
     schedule:
-      interval: "daily"
+      interval: "weekly"
+      day: "thursday"
+      time: "10:00"
+      timezone: "Europe/Paris"
+    open-pull-requests-limit: 20
 
   - package-ecosystem: "pip"
     directory: "/python"
     schedule:
-      interval: "daily"
+      interval: "weekly"
+      day: "thursday"
+      time: "10:00"
+      timezone: "Europe/Paris"
+    open-pull-requests-limit: 20
 
   - package-ecosystem: "npm"
     directory: "/typescript"
     schedule:
-      interval: "daily"
+      interval: "weekly"
+      day: "thursday"
+      time: "10:00"
+      timezone: "Europe/Paris"
+    open-pull-requests-limit: 20
 
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "weekly"
+      day: "thursday"
+      time: "10:00"
+      timezone: "Europe/Paris"
+    open-pull-requests-limit: 20
