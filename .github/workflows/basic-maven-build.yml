@@ -17,8 +17,8 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '11'
-          distribution: 'adopt'
+          distribution: 'zulu'
           cache: 'maven'
 
       - name: Build with Maven
-        run: cd java && mvn -B -V clean verify
+        run: mvn -B -V clean verify
