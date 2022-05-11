@@ -21,4 +21,4 @@ jobs:
           cache: 'maven'
 
       - name: Build with Maven
-        run: mvn -B -V clean verify
+        run: cd java && mvn -B -V clean verify
