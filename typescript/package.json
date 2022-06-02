@@ -3,7 +3,7 @@
   "author": "Vincent RAMPAL <vincent.rampal@gmail.com>",
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "5.23.0",
-    "@typescript-eslint/parser": "5.23.0",
+    "@typescript-eslint/parser": "5.27.0",
     "eslint": "8.15.0"
   }
 }
