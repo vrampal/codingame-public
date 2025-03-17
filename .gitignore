@@ -98,4 +98,7 @@ Thumbs.db
 hs_err_pid*
 *.hprof
 
+# Environment files
+.env
+
 # Project specific files
